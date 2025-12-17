@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio - Accueil</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>[Votre Nom]</h1>
+    <nav>
+        <a href="accueil.html" class="active">Accueil</a>
+        <a href="competences.html">Compétences</a>
+        <a href="projets.html">Projets</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+    <button class="theme-toggle">🌙</button>
+</header>
+
+<main>
+    <h2>Bonjour, je suis [Votre Nom]</h2>
+    <p>Développeur web passionné, spécialisé dans la création de sites modernes, élégants et interactifs.</p>
+    <a href="contact.html" class="button">Me contacter</a>
+</main>
+
+<footer>
+&copy; 2025 [Votre Nom] - Tous droits réservés
+</footer>
+
+<script>
+// Bouton thème clair/sombre
+const toggle = document.querySelector('.theme-toggle');
+toggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark');
+    toggle.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
+});
+
+// Animation au chargement
+window.addEventListener('load', () => {
+    document.querySelector('main').classList.add('show');
+});
+</script>
+
+</body>
+</html>
