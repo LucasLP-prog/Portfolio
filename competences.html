@@ -15,6 +15,8 @@
     --dark-card: #1e1e1e;
     --text-light: #222;
     --text-dark: #e0e0e0;
+    --glow-light: rgba(79,70,229,0.5);
+    --glow-dark: rgba(255,101,132,0.6);
 }
 * { box-sizing: border-box; }
 
@@ -34,44 +36,60 @@ header {
 }
 body.dark header { background:rgba(18,18,18,0.9); border-color:#333; }
 
-header h1 { font-weight:700; font-size:1.8rem; }
-nav a { margin-left:30px; color:inherit; text-decoration:none; font-weight:500; position:relative; }
+header h1 {
+    font-weight:700; font-size:1.8rem;
+    opacity:0; transform:translateY(40px);
+    transition: all 0.8s ease-out;
+}
+nav a {
+    margin-left:30px; color:inherit; text-decoration:none; font-weight:500; position:relative;
+    opacity:0; transform:translateY(40px); transition: all 0.8s ease-out;
+}
 nav a.active::after { content:''; position:absolute; bottom:-5px; left:0; width:100%; height:2px; background:var(--primary); border-radius:2px; }
 nav a:hover { color: var(--primary); }
 
-/* Bouton thème avec glow et rotation à droite (comme la page d'accueil) */
 .theme-toggle {
-    padding:10px 20px;
-    border:none;
-    border-radius:50px;
+    padding:10px 20px; border:none; border-radius:50px;
     background: linear-gradient(45deg, var(--primary), var(--secondary));
-    color:#fff;
-    cursor:pointer;
-    font-weight:600;
-    transition: transform 0.3s, box-shadow 0.3s;
-    z-index:10000;
+    color:#fff; cursor:pointer; font-weight:600;
+    transition: transform 0.3s, box-shadow 0.3s; z-index:10000;
+    opacity:0; transform:translateY(40px);
 }
-.theme-toggle:hover {
-    transform: scale(1.2) rotate(10deg);
-    box-shadow: 0 0 20px rgba(79,70,229,0.5);
-}
-body.dark .theme-toggle:hover {
-    box-shadow: 0 0 25px rgba(255,101,132,0.6);
-}
+.theme-toggle:hover { transform: scale(1.2) rotate(10deg); box-shadow: 0 0 20px var(--glow-light); }
+body.dark .theme-toggle:hover { box-shadow: 0 0 25px var(--glow-dark); }
 
-main { padding:120px 20px 50px 20px; max-width:1000px; margin:auto; }
-section { margin-bottom:80px; opacity:0; transform:translateY(50px); transition:all 0.8s ease-out; }
-section.show { opacity:1; transform:translateY(0); }
+main { padding:140px 20px 50px 20px; max-width:1000px; margin:auto; }
 
-section h2 { font-size:2.5rem; margin-bottom:20px; text-align:center; }
+section { margin-bottom:80px; }
+section h2 {
+    font-size:2.5rem; margin-bottom:20px; text-align:center;
+    opacity:0; transform:translateY(40px); transition: all 0.8s ease-out;
+}
+/* Néon pour h2 */
+h2.show {
+    opacity:1; transform:translateY(0);
+    text-shadow: 0 0 5px var(--glow-light), 0 0 10px var(--glow-light);
+}
+body.dark h2.show { text-shadow: 0 0 5px var(--glow-dark), 0 0 10px var(--glow-dark); }
+
 .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:30px; }
-.card { background:var(--light-card); padding:30px; border-radius:20px; box-shadow:0 8px 20px rgba(0,0,0,0.1); text-align:center; transition:0.3s; opacity:0; transform:translateY(50px); }
+.card {
+    background:var(--light-card); padding:30px; border-radius:20px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.1); text-align:center; transition:0.3s;
+    opacity:0; transform:translateY(40px);
+}
 body.dark .card { background: var(--dark-card); box-shadow:0 8px 20px rgba(0,0,0,0.5); }
 .card.show { opacity:1; transform:translateY(0); }
+.card h3, .card p { opacity:0; transform:translateY(40px); transition: all 0.8s ease-out; }
+.card h3.show, .card p.show { opacity:1; transform:translateY(0); }
 .card:hover { transform:translateY(-10px); }
 
-footer { text-align:center; padding:30px 0; border-top:1px solid #ccc; margin-top:50px; }
+footer {
+    text-align:center; padding:30px 0; border-top:1px solid #ccc; margin-top:50px;
+    opacity:0; transform:translateY(40px); transition: all 0.8s ease-out;
+}
 body.dark footer { border-color:#333; }
+footer.show { opacity:1; transform:translateY(0); }
 
 @media(max-width:768px) {
     header { padding:15px 20px; }
@@ -82,7 +100,7 @@ body.dark footer { border-color:#333; }
 <body>
 
 <header>
-<h1>Lucas Lara Peyrière </h1>
+<h1>Lucas Lara Peyrière</h1>
 <nav>
     <a href="accueil.html">Accueil</a>
     <a href="competences.html" class="active">Compétences</a>
@@ -96,10 +114,22 @@ body.dark footer { border-color:#333; }
 <section>
 <h2>Mes Compétences</h2>
 <div class="cards">
-    <div class="card"><h3>HTML & CSS</h3><p>Sites responsives et modernes.</p></div>
-    <div class="card"><h3>JavaScript</h3><p>Applications interactives front-end et back-end.</p></div>
-    <div class="card"><h3>React & Node.js</h3><p>Applications performantes et modulaires.</p></div>
-    <div class="card"><h3>UI/UX Design</h3><p>Interfaces élégantes et expérience fluide.</p></div>
+    <div class="card">
+        <h3>HTML & CSS</h3>
+        <p>Sites responsives et modernes.</p>
+    </div>
+    <div class="card">
+        <h3>JavaScript</h3>
+        <p>Applications interactives front-end et back-end.</p>
+    </div>
+    <div class="card">
+        <h3>React & Node.js</h3>
+        <p>Applications performantes et modulaires.</p>
+    </div>
+    <div class="card">
+        <h3>UI/UX Design</h3>
+        <p>Interfaces élégantes et expérience fluide.</p>
+    </div>
 </div>
 </section>
 </main>
@@ -116,16 +146,44 @@ toggle.addEventListener('click', () => {
     toggle.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
 });
 
-// Scroll animations
-const sections = document.querySelectorAll('section, .card');
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if(entry.isIntersecting){
-            entry.target.classList.add('show');
-        }
+// Apparition progressive de tous les textes
+window.addEventListener('load', () => {
+    const headerH1 = document.querySelector('header h1');
+    const navLinks = document.querySelectorAll('nav a');
+    const toggleBtn = document.querySelector('.theme-toggle');
+    const h2 = document.querySelector('section h2');
+    const cards = document.querySelectorAll('.card');
+    const footer = document.querySelector('footer');
+
+    // Header
+    setTimeout(() => { headerH1.style.opacity = 1; headerH1.style.transform = 'translateY(0)'; }, 100);
+
+    // Nav links
+    navLinks.forEach((link, i) => {
+        setTimeout(() => { link.style.opacity = 1; link.style.transform = 'translateY(0)'; }, 300 + i * 100);
     });
-}, { threshold: 0.2 });
-sections.forEach(sec => observer.observe(sec));
+
+    // Theme button
+    setTimeout(() => { toggleBtn.style.opacity = 1; toggleBtn.style.transform = 'translateY(0)'; }, 700);
+
+    // H2 néon
+    setTimeout(() => { h2.classList.add('show'); }, 900);
+
+    // Cartes et leur contenu
+    cards.forEach((card, i) => {
+        setTimeout(() => { 
+            card.classList.add('show'); 
+            const h3 = card.querySelector('h3');
+            const p = card.querySelector('p');
+            setTimeout(() => { h3.classList.add('show'); }, 100);
+            setTimeout(() => { p.classList.add('show'); }, 300);
+        }, 1100 + i * 200);
+    });
+
+    // Footer
+    setTimeout(() => { footer.classList.add('show'); }, 2000);
+});
 </script>
+
 </body>
 </html>
