@@ -8,6 +8,7 @@
 <style>
 :root {
     --primary: #4f46e5;
+    --secondary: #ff6584;
     --light-bg: #f5f5f5;
     --dark-bg: #121212;
     --light-card: #fff;
@@ -38,8 +39,25 @@ nav a { margin-left:30px; color:inherit; text-decoration:none; font-weight:500; 
 nav a.active::after { content:''; position:absolute; bottom:-5px; left:0; width:100%; height:2px; background:var(--primary); border-radius:2px; }
 nav a:hover { color: var(--primary); }
 
-.theme-toggle { padding:10px 20px; border:none; border-radius:50px; background:var(--primary); color:#fff; cursor:pointer; font-weight:600; transition:0.3s; z-index:10000; }
-.theme-toggle:hover { transform:scale(1.05); }
+/* Bouton thème avec glow et rotation à droite (comme page d'accueil) */
+.theme-toggle {
+    padding:10px 20px;
+    border:none;
+    border-radius:50px;
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    color:#fff;
+    cursor:pointer;
+    font-weight:600;
+    transition: transform 0.3s, box-shadow 0.3s;
+    z-index:10000;
+}
+.theme-toggle:hover {
+    transform: scale(1.2) rotate(10deg);
+    box-shadow: 0 0 20px rgba(79,70,229,0.5);
+}
+body.dark .theme-toggle:hover {
+    box-shadow: 0 0 25px rgba(255,101,132,0.6);
+}
 
 main { padding:120px 20px 50px 20px; max-width:1000px; margin:auto; }
 section { margin-bottom:80px; opacity:0; transform:translateY(50px); transition:all 0.8s ease-out; }
@@ -64,7 +82,7 @@ body.dark footer { border-color:#333; }
 <body>
 
 <header>
-<h1>[Votre Nom]</h1>
+<h1>Lucas Lara Peyrière</h1>
 <nav>
     <a href="accueil.html">Accueil</a>
     <a href="competences.html">Compétences</a>
@@ -87,16 +105,18 @@ body.dark footer { border-color:#333; }
 </main>
 
 <footer>
-&copy; 2025 [Votre Nom] - Tous droits réservés
+&copy; 2025 Lucas Lara Peyrière - Tous droits réservés
 </footer>
 
 <script>
+// Theme toggle
 const toggle = document.querySelector('.theme-toggle');
 toggle.addEventListener('click', () => {
     document.body.classList.toggle('dark');
     toggle.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
 });
 
+// Scroll animations
 const sections = document.querySelectorAll('section, .card');
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => { if(entry.isIntersecting){ entry.target.classList.add('show'); } });
