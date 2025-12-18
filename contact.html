@@ -82,6 +82,7 @@ nav a::after {
 body.dark nav a::after { background: var(--secondary); }
 nav a:hover::after, nav a.active::after { width: 100%; }
 
+/* ✅ bouton theme = EXACTEMENT comme Accueil (PAS d'opacité/translate ici) */
 .theme-toggle {
     padding: 10px 20px;
     border-radius: 50px;
@@ -91,9 +92,6 @@ nav a:hover::after, nav a.active::after { width: 100%; }
     color: white;
     font-weight: 600;
     transition: transform 0.3s, box-shadow 0.3s;
-
-    opacity: 0;
-    transform: translateY(40px);
 }
 .theme-toggle:hover {
     transform: scale(1.2) rotate(6deg);
@@ -306,11 +304,10 @@ form.addEventListener('submit', async (e) => {
   }
 });
 
-/* ---------- ANIMATIONS ---------- */
+/* ---------- ANIMATIONS (le reste inchangé) ---------- */
 window.addEventListener('load', () => {
   const headerH1 = document.querySelector('header h1');
   const navLinks = document.querySelectorAll('nav a');
-  const toggleBtn = document.querySelector('.theme-toggle');
   const h2 = document.querySelector('main h2');
   const formEl = document.querySelector('form');
   const footer = document.querySelector('footer');
@@ -320,8 +317,6 @@ window.addEventListener('load', () => {
   navLinks.forEach((link, i) => {
     setTimeout(() => { link.style.opacity = 1; link.style.transform = 'translateY(0)'; }, 300 + i * 100);
   });
-
-  setTimeout(() => { toggleBtn.style.opacity = 1; toggleBtn.style.transform = 'translateY(0)'; }, 700);
 
   setTimeout(() => { h2.classList.add('show'); }, 900);
   setTimeout(() => { formEl.classList.add('show'); }, 1100);
