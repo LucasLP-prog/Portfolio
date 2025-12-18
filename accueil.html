@@ -5,9 +5,94 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Portfolio - Accueil</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<style>
+:root {
+    --primary: #4f46e5;
+    --secondary: #ff6584;
+    --light-bg: #f5f5f5;
+    --dark-bg: #121212;
+    --text-light: #222;
+    --text-dark: #e0e0e0;
+    --glow-light: rgba(79,70,229,0.5);
+    --glow-dark: rgba(255,101,132,0.6);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--light-bg);
+    color: var(--text-light);
+    transition: 0.3s;
+    overflow-x: hidden;
+    position: relative;
+}
+body.dark {
+    background: var(--dark-bg);
+    color: var(--text-dark);
+}
+
+#background {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 20px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    backdrop-filter: blur(12px);
+    background: rgba(255,255,255,0.9);
+    border-bottom: 1px solid #ccc;
+    z-index: 1000;
+    transition: 0.3s;
+}
+body.dark header { background: rgba(18,18,18,0.9); border-color: #333; }
+header h1 { font-size: 1.8rem; font-weight: 700; }
+
+nav a { margin-left: 30px; color: inherit; text-decoration: none; font-weight: 500; position: relative; }
+nav a::after { content: ""; position: absolute; left: 0; bottom: -6px; width: 0%; height: 2px; background: var(--primary); transition: 0.3s; }
+body.dark nav a::after { background: var(--secondary); }
+nav a:hover::after, nav a.active::after { width: 100%; }
+
+.theme-toggle {
+    padding: 10px 20px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    color: white;
+    font-weight: 600;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.theme-toggle:hover { transform: scale(1.2) rotate(6deg); box-shadow: 0 0 25px var(--glow-light); }
+body.dark .theme-toggle:hover { box-shadow: 0 0 30px var(--glow-dark); }
+
+main { min-height: 100vh; padding: 140px 20px 50px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; position: relative; z-index: 1; }
+main h2 { font-size: 3rem; margin-bottom: 20px; opacity: 0; transform: translateY(40px); animation: fadeInUp 1s forwards; }
+main p { font-size: 1.2rem; max-width: 700px; margin-bottom: 35px; opacity: 0; transform: translateY(40px); animation: fadeInUp 1s 0.3s forwards; }
+
+.button { padding: 15px 40px; border-radius: 50px; background: linear-gradient(90deg, var(--primary), var(--secondary)); color: #fff; font-weight: 600; text-decoration: none; position: relative; overflow: hidden; transition: transform .3s, box-shadow .3s; }
+.button:hover { transform: scale(1.1) translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,.25); }
+.button::after { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: rgba(255,255,255,0.2); transform: rotate(45deg); transition: .5s; }
+.button:hover::after { left: 100%; top: 100%; }
+
+footer { text-align: center; padding: 30px 0; border-top: 1px solid #ccc; position: relative; z-index: 1; }
+body.dark footer { border-color: #333; }
+
+@keyframes fadeInUp { from { opacity:0; transform:translateY(40px);} to {opacity:1; transform:translateY(0);} }
+@keyframes moveCircle { from { transform: translateY(0) rotate(0deg);} to { transform: translateY(50px) rotate(360deg);} }
+</style>
 </head>
 <body>
+
+<div id="background"></div>
 
 <header>
     <h1>[Votre Nom]</h1>
@@ -26,22 +111,40 @@
     <a href="contact.html" class="button">Me contacter</a>
 </main>
 
-<footer>
-&copy; 2025 [Votre Nom] - Tous droits réservés
-</footer>
+<footer>© 2025 [Votre Nom] – Tous droits réservés</footer>
 
 <script>
-// Bouton thème clair/sombre
 const toggle = document.querySelector('.theme-toggle');
 toggle.addEventListener('click', () => {
     document.body.classList.toggle('dark');
     toggle.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
+    generateCircles();
 });
 
-// Animation au chargement
-window.addEventListener('load', () => {
-    document.querySelector('main').classList.add('show');
-});
+function generateCircles() {
+    const bg = document.getElementById('background');
+    bg.innerHTML = '';
+    const count = 30;
+    for(let i=0; i<count; i++){
+        const circle = document.createElement('div');
+        const size = Math.random()*8 + 2;
+        circle.style.width = `${size}px`;
+        circle.style.height = `${size}px`;
+        circle.style.borderRadius = '50%';
+        circle.style.position = 'absolute';
+        circle.style.top = `${Math.random()*100}%`;
+        circle.style.left = `${Math.random()*100}%`;
+        circle.style.backgroundColor = document.body.classList.contains('dark') ? 'rgba(255,101,132,0.5)' : 'rgba(79,70,229,0.3)';
+
+        // Durée d'animation plus courte pour plus de vitesse
+        const duration = Math.random()*5 + 5; // 5 à 10s
+        circle.style.animation = `moveCircle ${duration}s linear infinite alternate`;
+
+        bg.appendChild(circle);
+    }
+}
+
+window.addEventListener('load', generateCircles);
 </script>
 
 </body>
