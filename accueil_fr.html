@@ -90,6 +90,12 @@ nav a:hover::after,
 nav a.active::after { width: 100%; }
 
 /* Boutons thème et langue */
+.header-buttons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
 .theme-toggle,
 .lang-toggle {
     padding: 10px 20px;
@@ -100,7 +106,7 @@ nav a.active::after { width: 100%; }
     color: white;
     font-weight: 600;
     transition: transform 0.3s, box-shadow 0.3s;
-    margin-left: 15px;
+    margin-left: 0;
 }
 .theme-toggle:hover,
 .lang-toggle:hover {
@@ -208,22 +214,23 @@ body.dark footer { border-color: #333; }
         <a href="projets_fr.html">Projets</a>
         <a href="contact_fr.html">Contact</a>
     </nav>
-    <button class="theme-toggle">🌙</button>
-    <button class="lang-toggle" id="langToggle">
-      <span class="flag">🇫🇷</span>
-    </button>
+    <div class="header-buttons">
+        <button class="theme-toggle">🌙</button>
+        <button class="lang-toggle" id="langToggle">🇫🇷</button>
+    </div>
 </header>
 
 <main>
     <h2>Bienvenue sur mon portfolio</h2>
-    <p>Je suis passionné par l'informatique, les logiciels et le codage. J'aimerais travailler dans la cybersécurité. Vous pouvez aussi voir mes autres projets sur mon lien <a href="https://github.com/LucasLP-prog">Github</a></p>
-    <a href="contact.html" class="button">Me contacter</a>
+    <p>Je suis passionné par l'informatique, les logiciels et le codage. J'aimerais travailler dans la cybersécurité. Vous pouvez aussi voir mes autres projets sur mon <a href="https://github.com/LucasLP-prog">Github</a>.</p>
+    <a href="contact_fr.html" class="button">Me contacter</a>
 </main>
 
 <footer>© 2025 Lucas Lara Peyrière – Tous droits réservés</footer>
 
 <script>
 const toggle = document.querySelector('.theme-toggle');
+const langBtn = document.querySelector('.lang-toggle');
 
 /* ---------- CHARGEMENT DU THEME ---------- */
 const savedTheme = localStorage.getItem('theme');
@@ -285,13 +292,8 @@ window.addEventListener('load', () => {
 });
 
 /* ---------- LANGUE (FR / ES) ---------- */
-const langBtn = document.querySelector('.lang-toggle');
 const savedLang = localStorage.getItem('lang') || 'fr';
-
-/* Détection page actuelle */
 const page = window.location.pathname.split('/').pop();
-
-/* Mapping des pages */
 const pages = {
   accueil: { fr: 'accueil_fr.html', es: 'accueil_es.html' },
   competences: { fr: 'competences_fr.html', es: 'competencias_es.html' },
@@ -299,7 +301,6 @@ const pages = {
   contact: { fr: 'contact_fr.html', es: 'contacto_es.html' }
 };
 
-/* Trouver la page logique */
 let currentKey = null;
 for (const key in pages) {
   if (Object.values(pages[key]).includes(page)) {
@@ -308,15 +309,12 @@ for (const key in pages) {
   }
 }
 
-/* Mettre le texte du bouton */
 langBtn.textContent = savedLang.toUpperCase();
 
-/* Redirection auto si langue ≠ page */
 if (currentKey && pages[currentKey][savedLang] !== page) {
   window.location.replace(pages[currentKey][savedLang]);
 }
 
-/* Click bouton */
 langBtn.addEventListener('click', () => {
   const newLang = savedLang === 'fr' ? 'es' : 'fr';
   localStorage.setItem('lang', newLang);
@@ -326,7 +324,6 @@ langBtn.addEventListener('click', () => {
   }
 });
 
-/* Sync multi-onglets */
 window.addEventListener('storage', (e) => {
   if (e.key === 'lang') {
     location.reload();

@@ -89,6 +89,13 @@ body.dark nav a::after { background: var(--secondary); }
 nav a:hover::after,
 nav a.active::after { width: 100%; }
 
+/* Conteneur boutons thème et langue */
+.header-buttons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
 /* Boutons thème et langue */
 .theme-toggle,
 .lang-toggle {
@@ -100,7 +107,6 @@ nav a.active::after { width: 100%; }
     color: white;
     font-weight: 600;
     transition: transform 0.3s, box-shadow 0.3s;
-    margin-left: 15px;
 }
 .theme-toggle:hover,
 .lang-toggle:hover {
@@ -208,14 +214,16 @@ body.dark footer { border-color: #333; }
         <a href="proyectos_es.html">Proyectos</a>
         <a href="contacto_es.html">Contacto</a>
     </nav>
-    <button class="theme-toggle">🌙</button>
-    <button class="lang-toggle" id="langToggle">FR</button>
+    <div class="header-buttons">
+        <button class="theme-toggle">🌙</button>
+        <button class="lang-toggle" id="langToggle">FR</button>
+    </div>
 </header>
 
 <main>
     <h2>Bienvenido a mi portafolio</h2>
     <p>Soy un apasionado de la informática, el software y la programación. Me gustaría trabajar en ciberseguridad. También puedes ver mis otros proyectos en mi perfil de <a href="https://github.com/LucasLP-prog">Github</a></p>
-    <a href="contact_es.html" class="button">Contactarme</a>
+    <a href="contacto_es.html" class="button">Contactarme</a>
 </main>
 
 <footer>© 2025 Lucas Lara Peyrière – Todos los derechos reservados</footer>
@@ -234,9 +242,7 @@ if (savedTheme === 'dark') {
 toggle.addEventListener('click', () => {
     document.body.classList.toggle('dark');
     toggle.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
-
     localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
-
     generateCircles();
 });
 
@@ -244,11 +250,9 @@ toggle.addEventListener('click', () => {
 function generateCircles() {
     const bg = document.getElementById('background');
     bg.innerHTML = '';
-
     for (let i = 0; i < 30; i++) {
         const circle = document.createElement('div');
         const size = Math.random() * 8 + 2;
-
         circle.style.width = `${size}px`;
         circle.style.height = `${size}px`;
         circle.style.borderRadius = '50%';
@@ -258,10 +262,8 @@ function generateCircles() {
         circle.style.backgroundColor = document.body.classList.contains('dark')
             ? 'rgba(255,101,132,0.5)'
             : 'rgba(79,70,229,0.3)';
-
         const duration = Math.random() * 5 + 5;
         circle.style.animation = `moveCircle ${duration}s linear infinite alternate`;
-
         bg.appendChild(circle);
     }
 }
@@ -269,34 +271,18 @@ function generateCircles() {
 /* ---------- AL CARGAR ---------- */
 window.addEventListener('load', () => {
     generateCircles();
-
     const h1 = document.querySelector('header h1');
     const h2 = document.querySelector('main h2');
     const p = document.querySelector('main p');
-
-    setTimeout(() => {
-        h1.style.opacity = 1;
-        h1.style.transform = 'translateY(0)';
-    }, 100);
-
-    setTimeout(() => {
-        h2.classList.add('show');
-    }, 400);
-
-    setTimeout(() => {
-        p.style.opacity = 1;
-        p.style.transform = 'translateY(0)';
-    }, 700);
+    setTimeout(() => { h1.style.opacity = 1; h1.style.transform = 'translateY(0)'; }, 100);
+    setTimeout(() => { h2.classList.add('show'); }, 400);
+    setTimeout(() => { p.style.opacity = 1; p.style.transform = 'translateY(0)'; }, 700);
 });
 
 /* ---------- LANGUE (FR / ES) ---------- */
 const langBtn = document.querySelector('.lang-toggle');
 const savedLang = localStorage.getItem('lang') || 'fr';
-
-/* Détection page actuelle */
 const page = window.location.pathname.split('/').pop();
-
-/* Mapping des pages */
 const pages = {
   accueil: { fr: 'accueil_fr.html', es: 'accueil_es.html' },
   competences: { fr: 'competences_fr.html', es: 'competencias_es.html' },
@@ -304,7 +290,6 @@ const pages = {
   contact: { fr: 'contact_fr.html', es: 'contacto_es.html' }
 };
 
-/* Trouver la page logique */
 let currentKey = null;
 for (const key in pages) {
   if (Object.values(pages[key]).includes(page)) {
@@ -313,25 +298,20 @@ for (const key in pages) {
   }
 }
 
-/* Mettre le texte du bouton selon langue */
 langBtn.textContent = savedLang.toUpperCase();
 
-/* Redirection auto si langue ≠ page */
 if (currentKey && pages[currentKey][savedLang] !== page) {
   window.location.replace(pages[currentKey][savedLang]);
 }
 
-/* Click bouton */
 langBtn.addEventListener('click', () => {
   const newLang = savedLang === 'fr' ? 'es' : 'fr';
   localStorage.setItem('lang', newLang);
-
   if (currentKey) {
     window.location.href = pages[currentKey][newLang];
   }
 });
 
-/* Sync multi-onglets */
 window.addEventListener('storage', (e) => {
   if (e.key === 'lang') {
     location.reload();
