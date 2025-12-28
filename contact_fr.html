@@ -64,7 +64,6 @@ nav a {
     text-decoration: none;
     font-weight: 500;
     position: relative;
-
     opacity: 0;
     transform: translateY(40px);
     transition: all 0.8s ease-out;
@@ -82,11 +81,13 @@ nav a::after {
 body.dark nav a::after { background: var(--secondary); }
 nav a:hover::after, nav a.active::after { width: 100%; }
 
-/* ✅ Boutons thème et langue côte à côte */
+/* ✅ Modification : boutons côte à côte avec un gap */
 .header-buttons {
     display: flex;
     align-items: center;
+    gap: 10px; /* espace entre les deux boutons */
 }
+
 .theme-toggle, .lang-toggle {
     padding: 10px 20px;
     border-radius: 50px;
@@ -104,7 +105,8 @@ nav a:hover::after, nav a.active::after { width: 100%; }
 body.dark .theme-toggle:hover, body.dark .lang-toggle:hover {
     box-shadow: 0 0 30px var(--glow-dark);
 }
-.lang-toggle { margin-left: 15px; }
+/* on supprime margin-left de .lang-toggle pour que les boutons soient côte à côte */
+/* .lang-toggle { margin-left: 15px; } */
 
 main {
     min-height: 100vh;
@@ -139,12 +141,10 @@ form {
     flex-direction: column;
     gap: 20px;
     margin-top: 20px;
-
     background: var(--light-card);
     padding: 30px;
     border-radius: 20px;
     box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-
     opacity: 0;
     transform: translateY(40px);
     transition: all 0.8s ease-out;
@@ -161,7 +161,6 @@ input, textarea {
     border: 1px solid #ccc;
     font-size: 1rem;
     width: 100%;
-    transition: 0.3s;
     background: transparent;
     color: inherit;
 }
@@ -201,7 +200,6 @@ input:focus, textarea:focus { border-color: var(--primary); outline: none; }
     color: green;
     font-weight: 600;
     margin-top: 10px;
-
     opacity: 0;
     transform: translateY(40px);
     transition: all 0.8s ease-out;
@@ -213,7 +211,6 @@ footer {
     padding: 30px 0;
     border-top: 1px solid #ccc;
     margin-top: 50px;
-
     opacity: 0;
     transform: translateY(40px);
     transition: all 0.8s ease-out;

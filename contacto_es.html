@@ -64,7 +64,6 @@ nav a {
     text-decoration: none;
     font-weight: 500;
     position: relative;
-
     opacity: 0;
     transform: translateY(40px);
     transition: all 0.8s ease-out;
@@ -82,7 +81,13 @@ nav a::after {
 body.dark nav a::after { background: var(--secondary); }
 nav a:hover::after, nav a.active::after { width: 100%; }
 
-/* ✅ thème et langue identiques */
+/* ✅ Boutons thème et langue côte à côte */
+.header-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* espace entre les boutons */
+}
+
 .theme-toggle, .lang-toggle {
     padding: 10px 20px;
     border-radius: 50px;
@@ -100,7 +105,8 @@ nav a:hover::after, nav a.active::after { width: 100%; }
 body.dark .theme-toggle:hover, body.dark .lang-toggle:hover {
     box-shadow: 0 0 30px var(--glow-dark);
 }
-.lang-toggle { margin-left: 15px; }
+/* on supprime margin-left pour que les boutons soient côte à côte */
+/* .lang-toggle { margin-left: 15px; } */
 
 main {
     min-height: 100vh;
@@ -222,7 +228,6 @@ footer.show { opacity: 1; transform: translateY(0); }
     header { padding: 15px 20px; }
     nav a { margin-left: 15px; font-size: 0.9rem; }
 }
-
 </style>
 </head>
 
@@ -236,8 +241,10 @@ footer.show { opacity: 1; transform: translateY(0); }
     <a href="proyectos_es.html">Proyectos</a>
     <a href="contacto_es.html" class="active">Contacto</a>
 </nav>
-<button class="theme-toggle">🌙</button>
-<button class="lang-toggle">FR</button>
+<div class="header-buttons">
+    <button class="theme-toggle">🌙</button>
+    <button class="lang-toggle">FR</button>
+</div>
 </header>
 
 <main>
