@@ -13,10 +13,8 @@
     --secondary: #ff6584;
     --light-bg: #f5f5f5;
     --dark-bg: #121212;
-
     --light-card: #fff;
     --dark-card: #1e1e1e;
-
     --text-light: #222;
     --text-dark: #e0e0e0;
     --glow-light: rgba(79,70,229,0.5);
@@ -64,7 +62,6 @@ nav a {
     text-decoration: none;
     font-weight: 500;
     position: relative;
-
     opacity: 0;
     transform: translateY(40px);
     transition: all 0.8s ease-out;
@@ -82,7 +79,13 @@ nav a::after {
 body.dark nav a::after { background: var(--secondary); }
 nav a:hover::after, nav a.active::after { width: 100%; }
 
-/* ✅ bouton thème et langue identiques */
+/* ---------- BOUTONS THEME & LANGUE ---------- */
+.header-buttons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
 .theme-toggle, .lang-toggle {
     padding: 10px 20px;
     border-radius: 50px;
@@ -100,7 +103,6 @@ nav a:hover::after, nav a.active::after { width: 100%; }
 body.dark .theme-toggle:hover, body.dark .lang-toggle:hover {
     box-shadow: 0 0 30px var(--glow-dark);
 }
-.lang-toggle { margin-left: 15px; }
 
 main {
     min-height: 100vh;
@@ -164,7 +166,6 @@ footer {
     padding: 30px 0;
     border-top: 1px solid #ccc;
     margin-top: 50px;
-
     opacity: 0;
     transform: translateY(40px);
     transition: all 0.8s ease-out;
@@ -176,7 +177,6 @@ footer.show { opacity: 1; transform: translateY(0); }
     header { padding: 15px 20px; }
     nav a { margin-left: 15px; font-size: 0.9rem; }
 }
-
 </style>
 </head>
 
@@ -190,8 +190,10 @@ footer.show { opacity: 1; transform: translateY(0); }
         <a href="proyectos_es.html" class="active">Proyectos</a>
         <a href="contacto_es.html">Contacto</a>
     </nav>
-    <button class="theme-toggle">🌙</button>
-    <button class="lang-toggle">FR</button>
+    <div class="header-buttons">
+        <button class="theme-toggle">🌙</button>
+        <button class="lang-toggle">FR</button>
+    </div>
 </header>
 
 <main>
@@ -223,6 +225,7 @@ footer.show { opacity: 1; transform: translateY(0); }
 
 <script>
 const toggle = document.querySelector('.theme-toggle');
+const langBtn = document.querySelector('.lang-toggle');
 
 /* ---------- TEMA ---------- */
 const savedTheme = localStorage.getItem('theme');
@@ -234,10 +237,7 @@ if (savedTheme === 'dark') {
 toggle.addEventListener('click', () => {
   document.body.classList.toggle('dark');
   toggle.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
-  localStorage.setItem(
-    'theme',
-    document.body.classList.contains('dark') ? 'dark' : 'light'
-  );
+  localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
 });
 
 window.addEventListener('storage', (e) => {
@@ -277,8 +277,7 @@ window.addEventListener('load', () => {
   setTimeout(() => { footer.classList.add('show'); }, 2000);
 });
 
-/* ---------- LANGUE ---------- */
-const langBtn = document.querySelector('.lang-toggle');
+/* ---------- IDIOMA ---------- */
 const savedLang = localStorage.getItem('lang') || 'fr';
 const page = window.location.pathname.split('/').pop();
 const pages = {
