@@ -64,6 +64,7 @@ nav a {
     text-decoration: none;
     font-weight: 500;
     position: relative;
+
     opacity: 0;
     transform: translateY(40px);
     transition: all 0.8s ease-out;
@@ -87,7 +88,6 @@ nav a:hover::after, nav a.active::after { width: 100%; }
     align-items: center;
     gap: 10px; /* espace entre les boutons */
 }
-
 .theme-toggle, .lang-toggle {
     padding: 10px 20px;
     border-radius: 50px;
@@ -105,8 +105,6 @@ nav a:hover::after, nav a.active::after { width: 100%; }
 body.dark .theme-toggle:hover, body.dark .lang-toggle:hover {
     box-shadow: 0 0 30px var(--glow-dark);
 }
-/* on supprime margin-left pour que les boutons soient côte à côte */
-/* .lang-toggle { margin-left: 15px; } */
 
 main {
     min-height: 100vh;
