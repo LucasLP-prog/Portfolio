@@ -40,7 +40,6 @@ header {
     width: 100%;
     padding: 20px 50px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
     backdrop-filter: blur(12px);
     background: rgba(255,255,255,0.9);
@@ -58,8 +57,15 @@ header h1 {
     transition: all 0.8s ease-out;
 }
 
+.header-right {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    gap: 15px;
+}
+
 nav a {
-    margin-left: 30px;
+    margin-left: 20px;
     color: inherit;
     text-decoration: none;
     font-weight: 500;
@@ -82,7 +88,6 @@ nav a::after {
 body.dark nav a::after { background: var(--secondary); }
 nav a:hover::after, nav a.active::after { width: 100%; }
 
-/* ✅ thème et langue identiques */
 .theme-toggle, .lang-toggle {
     padding: 10px 20px;
     border-radius: 50px;
@@ -100,7 +105,6 @@ nav a:hover::after, nav a.active::after { width: 100%; }
 body.dark .theme-toggle:hover, body.dark .lang-toggle:hover {
     box-shadow: 0 0 30px var(--glow-dark);
 }
-.lang-toggle { margin-left: 15px; }
 
 main {
     min-height: 100vh;
@@ -222,22 +226,23 @@ footer.show { opacity: 1; transform: translateY(0); }
     header { padding: 15px 20px; }
     nav a { margin-left: 15px; font-size: 0.9rem; }
 }
-
 </style>
 </head>
 
 <body>
 
 <header>
-<h1>Lucas Lara Peyrière</h1>
-<nav>
-    <a href="accueil_fr.html">Accueil</a>
-    <a href="competences_fr.html">Compétences</a>
-    <a href="projets_fr.html">Projets</a>
-    <a href="contact_fr.html" class="active">Contact</a>
-</nav>
-<button class="theme-toggle">🌙</button>
-<button class="lang-toggle">ES</button>
+  <h1>Lucas Lara Peyrière</h1>
+  <div class="header-right">
+    <nav>
+      <a href="accueil_fr.html">Accueil</a>
+      <a href="competences_fr.html">Compétences</a>
+      <a href="projets_fr.html">Projets</a>
+      <a href="contact_fr.html" class="active">Contact</a>
+    </nav>
+    <button class="theme-toggle">🌙</button>
+    <button class="lang-toggle">ES</button>
+  </div>
 </header>
 
 <main>
@@ -279,7 +284,7 @@ window.addEventListener('storage', (e) => {
   }
 });
 
-/* ---------- FORMSPREE AJAX ---------- */
+/* ---------- FORMULAIRE AJAX ---------- */
 const form = document.getElementById('contact-form');
 const msg = document.getElementById('success-message');
 
@@ -314,11 +319,9 @@ window.addEventListener('load', () => {
   const footer = document.querySelector('footer');
 
   setTimeout(() => { headerH1.style.opacity = 1; headerH1.style.transform = 'translateY(0)'; }, 100);
-
   navLinks.forEach((link, i) => {
     setTimeout(() => { link.style.opacity = 1; link.style.transform = 'translateY(0)'; }, 300 + i * 100);
   });
-
   setTimeout(() => { h2.classList.add('show'); }, 900);
   setTimeout(() => { formEl.classList.add('show'); }, 1100);
   setTimeout(() => { footer.classList.add('show'); }, 1500);
