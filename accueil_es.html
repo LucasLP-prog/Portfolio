@@ -89,14 +89,13 @@ body.dark nav a::after { background: var(--secondary); }
 nav a:hover::after,
 nav a.active::after { width: 100%; }
 
-/* Conteneur boutons thème et langue */
+/* Conteneur boutons thème et langue côte à côte */
 .header-buttons {
     display: flex;
     gap: 10px;
     align-items: center;
 }
 
-/* Boutons thème et langue */
 .theme-toggle,
 .lang-toggle {
     padding: 10px 20px;
@@ -215,6 +214,7 @@ body.dark footer { border-color: #333; }
         <a href="contacto_es.html">Contacto</a>
     </nav>
     <div class="header-buttons">
+        <!-- Bouton thème à gauche, langue à droite -->
         <button class="theme-toggle">🌙</button>
         <button class="lang-toggle" id="langToggle">FR</button>
     </div>
@@ -230,23 +230,17 @@ body.dark footer { border-color: #333; }
 
 <script>
 const toggle = document.querySelector('.theme-toggle');
-
-/* ---------- CARGA DEL TEMA ---------- */
 const savedTheme = localStorage.getItem('theme');
 if (savedTheme === 'dark') {
     document.body.classList.add('dark');
     toggle.textContent = '☀️';
 }
-
-/* ---------- CAMBIO DE TEMA + GUARDADO ---------- */
 toggle.addEventListener('click', () => {
     document.body.classList.toggle('dark');
     toggle.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
     localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
     generateCircles();
 });
-
-/* ---------- CÍRCULOS ANIMADOS ---------- */
 function generateCircles() {
     const bg = document.getElementById('background');
     bg.innerHTML = '';
@@ -267,8 +261,6 @@ function generateCircles() {
         bg.appendChild(circle);
     }
 }
-
-/* ---------- AL CARGAR ---------- */
 window.addEventListener('load', () => {
     generateCircles();
     const h1 = document.querySelector('header h1');
@@ -278,8 +270,6 @@ window.addEventListener('load', () => {
     setTimeout(() => { h2.classList.add('show'); }, 400);
     setTimeout(() => { p.style.opacity = 1; p.style.transform = 'translateY(0)'; }, 700);
 });
-
-/* ---------- LANGUE (FR / ES) ---------- */
 const langBtn = document.querySelector('.lang-toggle');
 const savedLang = localStorage.getItem('lang') || 'fr';
 const page = window.location.pathname.split('/').pop();
@@ -289,7 +279,6 @@ const pages = {
   projets: { fr: 'projets_fr.html', es: 'proyectos_es.html' },
   contact: { fr: 'contact_fr.html', es: 'contacto_es.html' }
 };
-
 let currentKey = null;
 for (const key in pages) {
   if (Object.values(pages[key]).includes(page)) {
@@ -297,13 +286,10 @@ for (const key in pages) {
     break;
   }
 }
-
 langBtn.textContent = savedLang.toUpperCase();
-
 if (currentKey && pages[currentKey][savedLang] !== page) {
   window.location.replace(pages[currentKey][savedLang]);
 }
-
 langBtn.addEventListener('click', () => {
   const newLang = savedLang === 'fr' ? 'es' : 'fr';
   localStorage.setItem('lang', newLang);
@@ -311,7 +297,6 @@ langBtn.addEventListener('click', () => {
     window.location.href = pages[currentKey][newLang];
   }
 });
-
 window.addEventListener('storage', (e) => {
   if (e.key === 'lang') {
     location.reload();
