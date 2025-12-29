@@ -11,11 +11,30 @@
   <style>
     body, h1 { font-family: "Raleway", sans-serif; }
     body, html { height: 100%; margin: 0; }
-    .bgimg { background-image: url('foret2.jpg'); min-height: 100%; background-position: center; background-size: cover; }
-    .countdown-box { font-size: 1.5rem; font-weight: bold; margin-top: 30px; padding: 20px 40px; border-radius: 12px; background: rgba(255, 255, 255, 0); display: inline-block; letter-spacing: 2px; }
-    .invisible-btn { background: transparent !important; color: transparent !important; border: none !important; padding: 20px 40px; display: inline-block; cursor: pointer; }
-  
-    /* Style du bouton langue en haut à droite */
+    .bgimg { 
+      background-image: url('foret2.jpg'); 
+      min-height: 100%; 
+      background-position: center; 
+      background-size: cover; 
+    }
+    .countdown-box { 
+      font-size: 1.5rem; 
+      font-weight: bold; 
+      margin-top: 30px; 
+      padding: 20px 40px; 
+      border-radius: 12px; 
+      background: rgba(255, 255, 255, 0); 
+      display: inline-block; 
+      letter-spacing: 2px; 
+    }
+    .invisible-btn { 
+      background: transparent !important; 
+      color: transparent !important; 
+      border: none !important; 
+      padding: 20px 40px; 
+      display: inline-block; 
+      cursor: pointer; 
+    }
     .lang-btn { 
       position: fixed; 
       top: 20px; 
@@ -44,21 +63,23 @@
       <div id="countdown" class="countdown-box">Chargement...</div>
       <div id="loading-msg" class="countdown-box" style="display:none; margin-top:20px;"></div>
       
-      <!-- Bouton invisible qui redirige vers accueil_fr.html ou accueil_es.html -->
-      <div id="skip-btn" style="margin-top:20px;">
+      <!-- Bouton invisible qui redirige vers accueil -->
+      <div id="skip-btn" style="margin-top:20px; display:none;">
         <a href="#" class="invisible-btn" id="skipBtn">Passer et accéder au portfolio</a>
       </div>
     </div>
   </div>
 
-  <!-- Bouton langue en haut à droite -->
+  <!-- Bouton langue -->
   <button id="langBtn" class="lang-btn">Español</button>
 
   <script>
-    // Compteur
+    // Définition du compte à rebours
     const targetDate = new Date("2026-01-19 18:00:00").getTime();
     const countdownElement = document.getElementById("countdown");
     const titleElement = document.getElementById("title");
+    const loadingMsg = document.getElementById("loading-msg");
+    const skipBtnDiv = document.getElementById("skip-btn");
 
     const timer = setInterval(() => {
       const now = new Date().getTime();
@@ -68,22 +89,11 @@
         clearInterval(timer);
         titleElement.innerText = "LE PORTFOLIO EST DISPONIBLE";
         countdownElement.style.display = "none";
-        document.getElementById("loading-msg").style.display = "block";
-        document.getElementById("loading-msg").innerText = "Préparation de la page...";
-        document.getElementById("skip-btn").style.display = "block";
+        loadingMsg.style.display = "block";
+        loadingMsg.innerText = "Préparation de la page...";
+        skipBtnDiv.style.display = "block";
 
-        // Redirection selon la langue de la page index
-        const selectedLang = localStorage.getItem('selectedLang') || 'fr'; // Récupère la langue choisie
-        let homePage = 'accueil_fr.html';  // Par défaut, la version française
-
-        if (selectedLang === 'es') {
-          homePage = 'accueil_es.html'; // Si la langue est espagnole, rediriger vers la version espagnole
-        }
-
-        // Après un délai de 5 secondes, rediriger vers la bonne page d'accueil
-        setTimeout(() => { 
-          window.location.href = homePage;
-        }, 5000);
+        redirectToHome(); // redirection automatique après 5s
         return;
       }
 
@@ -95,25 +105,31 @@
       countdownElement.innerText = `${days} j ${hours} h ${minutes} m ${seconds} s`;
     }, 1000);
 
-    // Bouton langue
-    const langBtn = document.getElementById('langBtn');
-    langBtn.addEventListener('click', () => {
-      const currentLang = localStorage.getItem('selectedLang') === 'es' ? 'fr' : 'es';
-      localStorage.setItem('selectedLang', currentLang); // Sauvegarde la langue choisie
-      window.location.href = currentLang === 'fr' ? "index.html" : "index_es.html"; // Redirige vers la page correspondant à la langue
+    // Fonction de redirection vers la bonne langue
+    function redirectToHome() {
+      const selectedLang = localStorage.getItem('selectedLang') || 'fr';
+      const homePage = selectedLang === 'es' ? 'accueil_es.html' : 'accueil_fr.html';
+      setTimeout(() => {
+        window.location.href = homePage;
+      }, 5000);
+    }
+
+    // Gestion du bouton "Passer"
+    document.getElementById("skipBtn").addEventListener("click", () => {
+      const selectedLang = localStorage.getItem('selectedLang') || 'fr';
+      const homePage = selectedLang === 'es' ? 'accueil_es.html' : 'accueil_fr.html';
+      window.location.href = homePage;
     });
 
-    // Skip button
-    const skipBtn = document.getElementById('skipBtn');
-    skipBtn.addEventListener('click', () => {
-      const selectedLang = localStorage.getItem('selectedLang') || 'fr';
-      let homePage = 'accueil_fr.html';
+    // Gestion du bouton langue
+    const langBtn = document.getElementById('langBtn');
+    const currentLang = localStorage.getItem('selectedLang') || 'fr';
+    langBtn.innerText = currentLang === 'fr' ? 'Español' : 'Français';
 
-      if (selectedLang === 'es') {
-        homePage = 'accueil_es.html';
-      }
-
-      window.location.href = homePage;
+    langBtn.addEventListener('click', () => {
+      const newLang = currentLang === 'fr' ? 'es' : 'fr';
+      localStorage.setItem('selectedLang', newLang);
+      window.location.href = newLang === 'fr' ? "index.html" : "index_es.html";
     });
   </script>
 </body>
