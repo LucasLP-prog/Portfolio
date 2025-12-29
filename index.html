@@ -100,7 +100,7 @@
     langBtn.addEventListener('click', () => {
       const currentLang = localStorage.getItem('selectedLang') === 'es' ? 'fr' : 'es';
       localStorage.setItem('selectedLang', currentLang); // Sauvegarde la langue choisie
-      window.location.href = currentLang === 'fr' ? "index_fr.html" : "index_es.html"; // Redirige vers la page correspondant à la langue
+      window.location.href = currentLang === 'fr' ? "index.html" : "index_es.html"; // Redirige vers la page correspondant à la langue
     });
 
     // Skip button
