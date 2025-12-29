@@ -1,56 +1,56 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Accueil</title>
-  
-  <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-  
-  <style>
-    body, h1 { font-family: "Raleway", sans-serif; }
-    body, html { height: 100%; margin: 0; }
-    .bgimg { 
-      background-image: url('foret2.jpg'); 
-      min-height: 100%; 
-      background-position: center; 
-      background-size: cover; 
-    }
-    .countdown-box { 
-      font-size: 1.5rem; 
-      font-weight: bold; 
-      margin-top: 30px; 
-      padding: 20px 40px; 
-      border-radius: 12px; 
-      background: rgba(255, 255, 255, 0); 
-      display: inline-block; 
-      letter-spacing: 2px; 
-    }
-    .invisible-btn { 
-      background: transparent !important; 
-      color: transparent !important; 
-      border: none !important; 
-      padding: 20px 40px; 
-      display: inline-block; 
-      cursor: pointer; 
-    }
-    .lang-btn { 
-      position: fixed; 
-      top: 20px; 
-      right: 20px; 
-      padding: 10px 25px; 
-      border-radius: 50px; 
-      border: none; 
-      cursor: pointer; 
-      background: linear-gradient(45deg, #4f46e5, #ff6584); 
-      color: white; 
-      font-weight: 600; 
-      transition: transform 0.3s; 
-      z-index: 1000;
-    }
-    .lang-btn:hover { transform: scale(1.1); }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Accueil</title>
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+<style>
+  body, h1 { font-family: "Raleway", sans-serif; }
+  body, html { height: 100%; margin: 0; }
+  .bgimg { 
+    background-image: url('foret2.jpg'); 
+    min-height: 100%; 
+    background-position: center; 
+    background-size: cover; 
+  }
+  .countdown-box { 
+    font-size: 1.5rem; 
+    font-weight: bold; 
+    margin-top: 30px; 
+    padding: 20px 40px; 
+    border-radius: 12px; 
+    background: rgba(255, 255, 255, 0); 
+    display: inline-block; 
+    letter-spacing: 2px; 
+  }
+  .invisible-btn { 
+    background: transparent !important; 
+    color: transparent !important; 
+    border: none !important; 
+    padding: 20px 40px; 
+    display: inline-block; 
+    cursor: pointer; 
+  }
+  .lang-btn { 
+    position: fixed; 
+    top: 20px; 
+    right: 20px; 
+    padding: 10px 25px; 
+    border-radius: 50px; 
+    border: none; 
+    cursor: pointer; 
+    background: linear-gradient(45deg, #4f46e5, #ff6584); 
+    color: white; 
+    font-weight: 600; 
+    transition: transform 0.3s; 
+    z-index: 1000;
+  }
+  .lang-btn:hover { transform: scale(1.1); }
+</style>
 </head>
 
 <body>
@@ -63,10 +63,8 @@
       <div id="countdown" class="countdown-box">Chargement...</div>
       <div id="loading-msg" class="countdown-box" style="display:none; margin-top:20px;"></div>
       
-      <!-- Bouton invisible qui redirige vers accueil -->
-      <div id="skip-btn" style="margin-top:20px; display:none;">
-        <a href="#" class="invisible-btn" id="skipBtn">Passer et accéder au portfolio</a>
-      </div>
+      <!-- Bouton invisible qui redirige directement vers accueil_es.html -->
+      <button id="portfolioBtn" class="invisible-btn">Accéder au portfolio</button>
     </div>
   </div>
 
@@ -74,12 +72,12 @@
   <button id="langBtn" class="lang-btn">Español</button>
 
   <script>
-    // Définition du compte à rebours
+    // Compte à rebours
     const targetDate = new Date("2026-01-19 18:00:00").getTime();
     const countdownElement = document.getElementById("countdown");
     const titleElement = document.getElementById("title");
     const loadingMsg = document.getElementById("loading-msg");
-    const skipBtnDiv = document.getElementById("skip-btn");
+    const portfolioBtn = document.getElementById("portfolioBtn");
 
     const timer = setInterval(() => {
       const now = new Date().getTime();
@@ -91,9 +89,7 @@
         countdownElement.style.display = "none";
         loadingMsg.style.display = "block";
         loadingMsg.innerText = "Préparation de la page...";
-        skipBtnDiv.style.display = "block";
-
-        redirectToHome(); // redirection automatique après 5s
+        portfolioBtn.style.display = "inline-block"; // bouton invisible cliquable
         return;
       }
 
@@ -105,31 +101,23 @@
       countdownElement.innerText = `${days} j ${hours} h ${minutes} m ${seconds} s`;
     }, 1000);
 
-    // Fonction de redirection vers la bonne langue
-    function redirectToHome() {
-      const selectedLang = localStorage.getItem('selectedLang') || 'fr';
-      const homePage = selectedLang === 'es' ? 'accueil_es.html' : 'accueil_fr.html';
-      setTimeout(() => {
-        window.location.href = homePage;
-      }, 5000);
-    }
-
-    // Gestion du bouton "Passer"
-    document.getElementById("skipBtn").addEventListener("click", () => {
-      const selectedLang = localStorage.getItem('selectedLang') || 'fr';
-      const homePage = selectedLang === 'es' ? 'accueil_es.html' : 'accueil_fr.html';
-      window.location.href = homePage;
+    // Bouton invisible pour accéder directement à accueil_es.html
+    portfolioBtn.addEventListener("click", () => {
+      window.location.href = "accueil_es.html";
     });
 
-    // Gestion du bouton langue
+    // Bouton langue
     const langBtn = document.getElementById('langBtn');
-    const currentLang = localStorage.getItem('selectedLang') || 'fr';
-    langBtn.innerText = currentLang === 'fr' ? 'Español' : 'Français';
+    const currentPage = window.location.pathname.split('/').pop();
+    const isSpanish = currentPage.includes('_es');
+    langBtn.textContent = isSpanish ? 'Français' : 'Español';
 
     langBtn.addEventListener('click', () => {
-      const newLang = currentLang === 'fr' ? 'es' : 'fr';
-      localStorage.setItem('selectedLang', newLang);
-      window.location.href = newLang === 'fr' ? "index.html" : "index_es.html";
+      if (isSpanish) {
+        window.location.href = 'index.html';
+      } else {
+        window.location.href = 'index_es.html';
+      }
     });
   </script>
 </body>
