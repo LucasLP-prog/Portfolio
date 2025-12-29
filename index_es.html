@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Inicio</title>
+  <title id="page-title">Inicio</title>
 
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
@@ -45,7 +45,7 @@
 
 <div class="bgimg w3-display-container w3-animate-opacity w3-text-white">
 
-  <div class="w3-display-topleft w3-padding-large w3-xlarge">
+  <div class="w3-display-topleft w3-padding-large w3-xlarge" id="header-name">
     LUCAS LARA PEYRIERE
   </div>
 
@@ -65,20 +65,37 @@
     </div>
 
     <div id="skip-btn" style="margin-top:20px;">
-      <a href="#" class="invisible-btn">Omitir y acceder al portfolio</a>
+      <a href="#" class="invisible-btn" id="skip-button">Omitir y acceder al portfolio</a>
     </div>
   </div>
 </div>
 
 <script>
-  // ---------- Redirección según idioma del navegador ----------
-  const userLang = navigator.language || navigator.userLanguage; // ex: "fr-FR" o "es-ES"
-  if (userLang.startsWith('es')) {
-    window.location.href = "accueil_es.html"; // Esta página en español
-  } else if (userLang.startsWith('fr')) {
-    window.location.href = "accueil_fr.html"; // Página en francés
-  }
-  // Si no, permanece en esta página por defecto
+  // ---------- Detección del idioma del navegador ----------
+  const userLang = navigator.language || navigator.userLanguage; // Ej: "fr-FR" o "es-ES"
+  const lang = userLang.startsWith('es') ? 'es' : (userLang.startsWith('fr') ? 'fr' : 'es'); // Por defecto, español si no está definido
+
+  // ---------- Traducciones ----------
+  const translations = {
+    fr: {
+      title: "LE PORTFOLIO ARRIVE BIENTÔT",
+      countdownText: "Chargement...",
+      loadingText: "Préparation de la page...",
+      skipButton: "Passer et accéder au portfolio"
+    },
+    es: {
+      title: "EL PORTFOLIO LLEGA PRONTO",
+      countdownText: "Cargando...",
+      loadingText: "Preparando la página...",
+      skipButton: "Omitir y acceder al portfolio"
+    }
+  };
+
+  // Aplicar el idioma
+  document.getElementById("page-title").innerText = translations[lang].title;
+  document.getElementById("countdown").innerText = translations[lang].countdownText;
+  document.getElementById("loading-msg").innerText = translations[lang].loadingText;
+  document.getElementById("skip-button").innerText = translations[lang].skipButton;
 
   // ---------- Contador ----------
   const targetDate = new Date("2026-01-19 18:00:00").getTime();
@@ -92,23 +109,22 @@
     if (distance <= 0) {
       clearInterval(timer);
 
-      titleElement.innerHTML = "EL PORTFOLIO ESTÁ DISPONIBLE";
+      titleElement.innerHTML = lang === 'fr' ? "LE PORTFOLIO EST DISPONIBLE" : "EL PORTFOLIO ESTÁ DISPONIBLE";
       countdownElement.style.display = "none";
 
       const loadingMsg = document.getElementById("loading-msg");
       loadingMsg.style.display = "block";
-      loadingMsg.innerHTML = "Preparando la página...";
+      loadingMsg.innerHTML = lang === 'fr' ? "Préparation de la page..." : "Preparando la página...";
 
       const skipBtn = document.getElementById("skip-btn");
       skipBtn.style.display = "block";
 
-      // Redirección después de 5 segundos hacia la versión española por defecto
+      // Redirección después de 5 segundos
       setTimeout(() => {
-        // Redirección según el idioma del navegador
-        if (userLang.startsWith('es')) {
-          window.location.href = "accueil_es.html"; // Redirigir a la versión en español
+        if (lang === 'fr') {
+          window.location.href = "accueil_fr.html"; // Redirigir a la versión francesa
         } else {
-          window.location.href = "accueil_fr.html"; // Redirigir a la versión en francés
+          window.location.href = "accueil_es.html"; // Redirigir a la versión española
         }
       }, 5000);
       return;
