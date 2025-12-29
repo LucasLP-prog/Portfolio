@@ -79,7 +79,7 @@ nav a::after {
 body.dark nav a::after { background: var(--secondary); }
 nav a:hover::after, nav a.active::after { width: 100%; }
 
-/* ---------- BOUTONS THEME & LANGUE ---------- */
+/* ---------- BOTONES TEMA & IDIOMA ---------- */
 .header-buttons {
     display: flex;
     gap: 10px;
@@ -146,13 +146,19 @@ body.dark h2.show {
     border-radius: 20px;
     box-shadow: 0 8px 20px rgba(0,0,0,0.1);
     text-align: center;
-    transition: 0.3s;
+    transition: 0.3s, box-shadow 0.3s;
     opacity: 0;
     transform: translateY(40px);
 }
 body.dark .card { background: var(--dark-card); box-shadow: 0 8px 20px rgba(0,0,0,0.5); }
+
+/* Efecto luminoso al pasar el mouse */
 .card.show { opacity: 1; transform: translateY(0); }
-.card:hover { transform: translateY(-10px); }
+.card:hover { 
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px var(--glow-light);
+}
+body.dark .card:hover { box-shadow: 0 15px 35px var(--glow-dark); }
 
 .card h3, .card p {
     opacity: 0;
@@ -233,13 +239,11 @@ if (savedTheme === 'dark') {
   document.body.classList.add('dark');
   toggle.textContent = '☀️';
 }
-
 toggle.addEventListener('click', () => {
   document.body.classList.toggle('dark');
   toggle.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
   localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
 });
-
 window.addEventListener('storage', (e) => {
   if (e.key === 'theme') {
     const isDark = e.newValue === 'dark';
@@ -288,27 +292,16 @@ const pages = {
 };
 let currentKey = null;
 for (const key in pages) {
-  if (Object.values(pages[key]).includes(page)) {
-    currentKey = key;
-    break;
-  }
+  if (Object.values(pages[key]).includes(page)) currentKey = key;
 }
 langBtn.textContent = savedLang.toUpperCase();
-if (currentKey && pages[currentKey][savedLang] !== page) {
-  window.location.replace(pages[currentKey][savedLang]);
-}
+if (currentKey && pages[currentKey][savedLang] !== page) window.location.replace(pages[currentKey][savedLang]);
 langBtn.addEventListener('click', () => {
   const newLang = savedLang === 'fr' ? 'es' : 'fr';
   localStorage.setItem('lang', newLang);
-  if (currentKey) {
-    window.location.href = pages[currentKey][newLang];
-  }
+  if (currentKey) window.location.href = pages[currentKey][newLang];
 });
-window.addEventListener('storage', (e) => {
-  if (e.key === 'lang') {
-    location.reload();
-  }
-});
+window.addEventListener('storage', (e) => { if (e.key === 'lang') location.reload(); });
 </script>
 
 </body>

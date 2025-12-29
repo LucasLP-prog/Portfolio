@@ -135,8 +135,15 @@ body.dark .card {
     background: var(--dark-card);
     box-shadow: 0 8px 20px rgba(0,0,0,0.5);
 }
+
+/* Effet lumineux autour des cartes lors du survol */
 .card.show { opacity: 1; transform: translateY(0); }
-.card:hover { transform: translateY(-10px); }
+.card:hover { 
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px var(--glow-light);
+}
+body.dark .card:hover { box-shadow: 0 15px 35px var(--glow-dark); }
+
 .card h3, .card p { opacity: 0; transform: translateY(40px); transition: all 0.8s ease-out; }
 .card h3.show, .card p.show { opacity: 1; transform: translateY(0); }
 
@@ -185,8 +192,8 @@ body.dark footer { border-color: #333; }
             <p>Petites productions et utilisation de logiciels audio</p>
         </div>
         <div class="card">
-            <h3>UI/UX Design</h3>
-            <p>Interfaces élégantes et expérience utilisateur fluide</p>
+            <h3>Bilingue</h3>
+            <p>Je parle couramment espagnol et donc je peux faire des sites en espagnol</p>
         </div>
     </div>
 </main>

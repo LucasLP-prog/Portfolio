@@ -146,13 +146,19 @@ body.dark h2.show {
     border-radius: 20px;
     box-shadow: 0 8px 20px rgba(0,0,0,0.1);
     text-align: center;
-    transition: 0.3s;
+    transition: 0.3s, box-shadow 0.3s;
     opacity: 0;
     transform: translateY(40px);
 }
 body.dark .card { background: var(--dark-card); box-shadow: 0 8px 20px rgba(0,0,0,0.5); }
+
+/* Effet lumineux sur hover */
 .card.show { opacity: 1; transform: translateY(0); }
-.card:hover { transform: translateY(-10px); }
+.card:hover { 
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px var(--glow-light);
+}
+body.dark .card:hover { box-shadow: 0 15px 35px var(--glow-dark); }
 
 .card h3, .card p {
     opacity: 0;
@@ -203,14 +209,14 @@ footer.show { opacity: 1; transform: translateY(0); }
     <div class="cards">
         <div class="card">
             <h3>Projet 1: Robot cup (Fini)</h3>
-            <p>robot construit de A à Z</p>
+            <p>Robot construit de A à Z</p>
         </div>
         <div class="card">
-            <h3>Projet 2: Construction d'une enceinte DYI (En cours)</h3>
-            <p>projet d'enceinte portable bluetooth avec des leds rgb réactives.</p>
+            <h3>Projet 2: Construction d'une enceinte DIY (En cours)</h3>
+            <p>Projet d'enceinte portable Bluetooth avec des LEDs RGB réactives.</p>
         </div>
         <div class="card">
-            <h3>Projet 3: Olympiades (en cours)</h3>
+            <h3>Projet 3: Olympiades (En cours)</h3>
             <p>Concours régional sur la ville de demain.</p>
         </div>
         <div class="card">
@@ -233,13 +239,11 @@ if (savedTheme === 'dark') {
   document.body.classList.add('dark');
   toggle.textContent = '☀️';
 }
-
 toggle.addEventListener('click', () => {
   document.body.classList.toggle('dark');
   toggle.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
   localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
 });
-
 window.addEventListener('storage', (e) => {
   if (e.key === 'theme') {
     const isDark = e.newValue === 'dark';
@@ -288,27 +292,16 @@ const pages = {
 };
 let currentKey = null;
 for (const key in pages) {
-  if (Object.values(pages[key]).includes(page)) {
-    currentKey = key;
-    break;
-  }
+  if (Object.values(pages[key]).includes(page)) currentKey = key;
 }
 langBtn.textContent = savedLang.toUpperCase();
-if (currentKey && pages[currentKey][savedLang] !== page) {
-  window.location.replace(pages[currentKey][savedLang]);
-}
+if (currentKey && pages[currentKey][savedLang] !== page) window.location.replace(pages[currentKey][savedLang]);
 langBtn.addEventListener('click', () => {
   const newLang = savedLang === 'fr' ? 'es' : 'fr';
   localStorage.setItem('lang', newLang);
-  if (currentKey) {
-    window.location.href = pages[currentKey][newLang];
-  }
+  if (currentKey) window.location.href = pages[currentKey][newLang];
 });
-window.addEventListener('storage', (e) => {
-  if (e.key === 'lang') {
-    location.reload();
-  }
-});
+window.addEventListener('storage', (e) => { if (e.key === 'lang') location.reload(); });
 </script>
 
 </body>
