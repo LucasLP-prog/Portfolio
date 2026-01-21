@@ -1,80 +1,107 @@
 <!DOCTYPE html>
+<!-- Déclare que le document utilise le standard HTML5 -->
+
 <html lang="fr">
+<!-- Début du document HTML, langue principale : français -->
+
 <head>
 <meta charset="UTF-8">
+<!-- Définit l’encodage UTF-8 pour gérer les accents et caractères spéciaux -->
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Rend la page responsive (adaptée aux écrans mobiles) -->
+
 <title>Portfolio - Accueil</title>
+<!-- Titre affiché dans l’onglet du navigateur -->
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<!-- Import de la police Google Fonts "Poppins" -->
 
 <style>
+/* ================= VARIABLES GLOBALES ================= */
 :root {
-    --primary: #4f46e5;
-    --secondary: #ff6584;
-    --light-bg: #f5f5f5;
-    --dark-bg: #121212;
-    --text-light: #222;
-    --text-dark: #e0e0e0;
-    --glow-light: rgba(79,70,229,0.5);
-    --glow-dark: rgba(255,101,132,0.6);
+    --primary: #4f46e5;           /* Couleur principale */
+    --secondary: #ff6584;         /* Couleur secondaire */
+    --light-bg: #f5f5f5;          /* Fond clair */
+    --dark-bg: #121212;           /* Fond sombre */
+    --text-light: #222;           /* Texte clair */
+    --text-dark: #e0e0e0;         /* Texte sombre */
+    --glow-light: rgba(79,70,229,0.5); /* Effet lumineux clair */
+    --glow-dark: rgba(255,101,132,0.6); /* Effet lumineux sombre */
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+/* Reset CSS : supprime marges et padding par défaut */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
+/* ================= BODY ================= */
 body {
-    font-family: 'Poppins', sans-serif;
-    background: var(--light-bg);
-    color: var(--text-light);
-    transition: 0.3s;
-    overflow-x: hidden;
+    font-family: 'Poppins', sans-serif; /* Police principale */
+    background: var(--light-bg);        /* Fond clair par défaut */
+    color: var(--text-light);            /* Couleur du texte */
+    transition: 0.3s;                    /* Transition fluide */
+    overflow-x: hidden;                  /* Empêche le scroll horizontal */
     position: relative;
 }
+
+/* Mode sombre */
 body.dark {
     background: var(--dark-bg);
     color: var(--text-dark);
 }
 
+/* ================= FOND ANIMÉ ================= */
 #background {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
+    position: fixed;       /* Fixé à l’écran */
+    inset: 0;              /* Prend toute la surface */
+    z-index: 0;             /* Derrière le contenu */
+    pointer-events: none;   /* N’intercepte pas les clics */
 }
 
+/* ================= HEADER ================= */
 header {
-    position: fixed;
+    position: fixed;        /* Fixe en haut */
     top: 0;
     width: 100%;
     padding: 20px 50px;
-    display: flex;
-    justify-content: space-between;
+    display: flex;          /* Utilise flexbox */
+    justify-content: space-between; /* Espace entre les éléments */
     align-items: center;
-    backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px); /* Effet verre flou */
     background: rgba(255,255,255,0.9);
     border-bottom: 1px solid #ccc;
-    z-index: 1000;
+    z-index: 1000;          /* Toujours au-dessus */
     transition: 0.3s;
 }
+
+/* Header en mode sombre */
 body.dark header {
     background: rgba(18,18,18,0.9);
     border-color: #333;
 }
 
+/* Nom dans le header */
 header h1 {
     font-size: 1.8rem;
     font-weight: 700;
-    opacity: 0;
-    transform: translateY(40px);
+    opacity: 0;                    /* Invisible au départ */
+    transform: translateY(40px);  /* Décalé vers le bas */
     transition: all 0.8s ease-out;
 }
 
+/* ================= NAVIGATION ================= */
 nav a {
     margin-left: 30px;
-    color: inherit;
-    text-decoration: none;
+    color: inherit;           /* Hérite de la couleur du parent */
+    text-decoration: none;    /* Supprime le soulignement */
     font-weight: 500;
     position: relative;
 }
+
+/* Ligne animée sous les liens */
 nav a::after {
     content: "";
     position: absolute;
@@ -85,17 +112,26 @@ nav a::after {
     background: var(--primary);
     transition: 0.3s;
 }
-body.dark nav a::after { background: var(--secondary); }
-nav a:hover::after,
-nav a.active::after { width: 100%; }
 
-/* Boutons thème et langue */
+/* Ligne différente en mode sombre */
+body.dark nav a::after {
+    background: var(--secondary);
+}
+
+/* Ligne visible au survol ou page active */
+nav a:hover::after,
+nav a.active::after {
+    width: 100%;
+}
+
+/* ================= BOUTONS HEADER ================= */
 .header-buttons {
     display: flex;
     gap: 10px;
     align-items: center;
 }
 
+/* Boutons thème et langue */
 .theme-toggle,
 .lang-toggle {
     padding: 10px 20px;
@@ -106,21 +142,25 @@ nav a.active::after { width: 100%; }
     color: white;
     font-weight: 600;
     transition: transform 0.3s, box-shadow 0.3s;
-    margin-left: 0;
 }
+
+/* Effet au survol */
 .theme-toggle:hover,
 .lang-toggle:hover {
     transform: scale(1.2) rotate(6deg);
     box-shadow: 0 0 25px var(--glow-light);
 }
+
+/* Effet différent en mode sombre */
 body.dark .theme-toggle:hover,
 body.dark .lang-toggle:hover {
     box-shadow: 0 0 30px var(--glow-dark);
 }
 
+/* ================= MAIN ================= */
 main {
-    min-height: 100vh;
-    padding: 140px 20px 50px;
+    min-height: 100vh;        /* Hauteur minimum = écran */
+    padding: 140px 20px 50px; /* Espace pour le header */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -130,6 +170,7 @@ main {
     z-index: 1;
 }
 
+/* Titre principal */
 main h2 {
     font-size: 3rem;
     margin-bottom: 20px;
@@ -137,15 +178,22 @@ main h2 {
     transform: translateY(40px);
     transition: all 0.8s ease-out;
 }
+
+/* Classe ajoutée par JavaScript */
 h2.show {
     opacity: 1;
     transform: translateY(0);
-    text-shadow: 0 0 5px var(--glow-light), 0 0 10px var(--glow-light);
-}
-body.dark h2.show {
-    text-shadow: 0 0 5px var(--glow-dark), 0 0 10px var(--glow-dark);
+    text-shadow: 0 0 5px var(--glow-light),
+                 0 0 10px var(--glow-light);
 }
 
+/* Glow en mode sombre */
+body.dark h2.show {
+    text-shadow: 0 0 5px var(--glow-dark),
+                 0 0 10px var(--glow-dark);
+}
+
+/* Paragraphe */
 main p {
     font-size: 1.2rem;
     max-width: 700px;
@@ -155,6 +203,7 @@ main p {
     transition: all 0.8s ease-out;
 }
 
+/* Bouton principal */
 .button {
     padding: 15px 40px;
     border-radius: 50px;
@@ -166,10 +215,14 @@ main p {
     overflow: hidden;
     transition: transform .3s, box-shadow .3s;
 }
+
+/* Animation au survol */
 .button:hover {
     transform: scale(1.1) translateY(-3px);
     box-shadow: 0 10px 20px rgba(0,0,0,.25);
 }
+
+/* Effet lumière */
 .button::after {
     content: '';
     position: absolute;
@@ -181,11 +234,14 @@ main p {
     transform: rotate(45deg);
     transition: .5s;
 }
+
+/* Animation de l’effet lumière */
 .button:hover::after {
     left: 100%;
     top: 100%;
 }
 
+/* ================= FOOTER ================= */
 footer {
     text-align: center;
     padding: 30px 0;
@@ -193,27 +249,41 @@ footer {
     position: relative;
     z-index: 1;
 }
-body.dark footer { border-color: #333; }
 
+/* Footer en mode sombre */
+body.dark footer {
+    border-color: #333;
+}
+
+/* ================= ANIMATION DES CERCLES ================= */
 @keyframes moveCircle {
-    from { transform: translateY(0) rotate(0deg); }
-    to { transform: translateY(50px) rotate(360deg); }
+    from {
+        transform: translateY(0) rotate(0deg);
+    }
+    to {
+        transform: translateY(50px) rotate(360deg);
+    }
 }
 </style>
 </head>
 
 <body>
 
+<!-- Conteneur du fond animé -->
 <div id="background"></div>
 
 <header>
     <h1>Lucas Lara Peyrière</h1>
+
+    <!-- Navigation -->
     <nav>
         <a href="accueil_fr.html" class="active">Accueil</a>
         <a href="competences_fr.html">Compétences</a>
         <a href="projets_fr.html">Projets</a>
         <a href="contact_fr.html">Contact</a>
     </nav>
+
+    <!-- Boutons thème et langue -->
     <div class="header-buttons">
         <button class="theme-toggle">🌙</button>
         <button class="lang-toggle" id="langToggle">🇫🇷</button>
@@ -222,53 +292,75 @@ body.dark footer { border-color: #333; }
 
 <main>
     <h2>Bienvenue sur mon portfolio</h2>
-    <p>Je suis passionné par l'informatique, les logiciels et le codage. J'aimerais travailler dans la cybersécurité. Vous pouvez aussi voir mes autres projets sur mon <a href="https://github.com/LucasLP-prog">Github</a>.</p>
+    <p>
+        Je suis passionné par l'informatique, les logiciels et le codage.
+        J'aimerais travailler dans la cybersécurité.
+        Vous pouvez aussi voir mes autres projets sur mon
+        <a href="https://github.com/LucasLP-prog">Github</a>.
+    </p>
     <a href="contact_fr.html" class="button">Me contacter</a>
 </main>
 
-<footer>© 2025 Lucas Lara Peyrière – Tous droits réservés</footer>
+<footer>
+    © 2025 Lucas Lara Peyrière – Tous droits réservés
+</footer>
 
 <script>
+// ================= BOUTON THEME =================
+
+// Sélection du bouton thème
 const toggle = document.querySelector('.theme-toggle');
+
+// Sélection du bouton langue
 const langBtn = document.querySelector('.lang-toggle');
 
-/* ---------- CHARGEMENT DU THEME ---------- */
+// Récupération du thème sauvegardé
 const savedTheme = localStorage.getItem('theme');
+
+// Applique le thème sombre si sauvegardé
 if (savedTheme === 'dark') {
     document.body.classList.add('dark');
     toggle.textContent = '☀️';
 }
 
-/* ---------- TOGGLE THEME + SAUVEGARDE ---------- */
+// Changement de thème au clic
 toggle.addEventListener('click', () => {
     document.body.classList.toggle('dark');
     toggle.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
-    localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
-    generateCircles();
+    localStorage.setItem(
+        'theme',
+        document.body.classList.contains('dark') ? 'dark' : 'light'
+    );
+    generateCircles(); // Régénère les cercles
 });
 
-/* ---------- CERLES ANIMÉS ---------- */
+// ================= CERCLES ANIMÉS =================
 function generateCircles() {
     const bg = document.getElementById('background');
-    bg.innerHTML = '';
+    bg.innerHTML = ''; // Supprime les anciens cercles
+
     for (let i = 0; i < 30; i++) {
         const circle = document.createElement('div');
         const size = Math.random() * 8 + 2;
+
         circle.style.width = `${size}px`;
         circle.style.height = `${size}px`;
         circle.style.borderRadius = '50%';
         circle.style.position = 'absolute';
         circle.style.top = `${Math.random() * 100}%`;
         circle.style.left = `${Math.random() * 100}%`;
-        circle.style.backgroundColor = document.body.classList.contains('dark')
-            ? 'rgba(255,101,132,0.5)'
-            : 'rgba(79,70,229,0.3)';
-        circle.style.animation = `moveCircle ${Math.random() * 5 + 5}s linear infinite alternate`;
+        circle.style.backgroundColor =
+            document.body.classList.contains('dark')
+                ? 'rgba(255,101,132,0.5)'
+                : 'rgba(79,70,229,0.3)';
+        circle.style.animation =
+            `moveCircle ${Math.random() * 5 + 5}s linear infinite alternate`;
+
         bg.appendChild(circle);
     }
 }
 
-/* ---------- AU CHARGEMENT ---------- */
+// ================= ANIMATIONS AU CHARGEMENT =================
 window.addEventListener('load', () => {
     generateCircles();
 
@@ -291,9 +383,10 @@ window.addEventListener('load', () => {
     }, 700);
 });
 
-/* ---------- LANGUE (FR / ES) ---------- */
+// ================= GESTION DES LANGUES =================
 const savedLang = localStorage.getItem('lang') || 'fr';
 const page = window.location.pathname.split('/').pop();
+
 const pages = {
   accueil: { fr: 'accueil_fr.html', es: 'accueil_es.html' },
   competences: { fr: 'competences_fr.html', es: 'competencias_es.html' },
@@ -302,6 +395,8 @@ const pages = {
 };
 
 let currentKey = null;
+
+// Détecte la page actuelle
 for (const key in pages) {
   if (Object.values(pages[key]).includes(page)) {
     currentKey = key;
@@ -309,12 +404,15 @@ for (const key in pages) {
   }
 }
 
+// Met à jour le texte du bouton langue
 langBtn.textContent = savedLang.toUpperCase();
 
+// Redirige automatiquement si la langue ne correspond pas
 if (currentKey && pages[currentKey][savedLang] !== page) {
   window.location.replace(pages[currentKey][savedLang]);
 }
 
+// Change de langue au clic
 langBtn.addEventListener('click', () => {
   const newLang = savedLang === 'fr' ? 'es' : 'fr';
   localStorage.setItem('lang', newLang);
@@ -324,6 +422,7 @@ langBtn.addEventListener('click', () => {
   }
 });
 
+// Synchronisation entre onglets
 window.addEventListener('storage', (e) => {
   if (e.key === 'lang') {
     location.reload();

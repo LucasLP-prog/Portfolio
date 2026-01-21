@@ -1,73 +1,102 @@
 <!DOCTYPE html>
+<!-- Déclare le type de document HTML5 -->
 <html lang="fr">
+<!-- Début du document HTML avec langue française -->
+
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portfolio - Contact</title>
+<!-- Encodage UTF-8 pour les caractères spéciaux -->
 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Permet un affichage responsive sur mobile -->
+
+<title>Portfolio - Contact</title>
+<!-- Titre de la page affiché dans l'onglet du navigateur -->
+
+<!-- Importation de la police Google Fonts 'Poppins' -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
+/* ---------- VARIABLES CSS ---------- */
 :root {
-    --primary: #4f46e5;
-    --secondary: #ff6584;
-    --light-bg: #f5f5f5;
-    --dark-bg: #121212;
-
-    --light-card: #fff;
-    --dark-card: #1e1e1e;
-
-    --text-light: #222;
-    --text-dark: #e0e0e0;
-    --glow-light: rgba(79,70,229,0.5);
-    --glow-dark: rgba(255,101,132,0.6);
+    --primary: #4f46e5;       /* Couleur principale (bleu violet) */
+    --secondary: #ff6584;     /* Couleur secondaire (rose) */
+    --light-bg: #f5f5f5;      /* Fond clair du site */
+    --dark-bg: #121212;       /* Fond sombre pour le mode dark */
+    --light-card: #fff;       /* Couleur des cartes en mode clair */
+    --dark-card: #1e1e1e;     /* Couleur des cartes en mode sombre */
+    --text-light: #222;       /* Couleur du texte en clair */
+    --text-dark: #e0e0e0;     /* Couleur du texte en sombre */
+    --glow-light: rgba(79,70,229,0.5); /* Glow bleu clair */
+    --glow-dark: rgba(255,101,132,0.6); /* Glow rose sombre */
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+/* ---------- RESET & BASE ---------- */
+* { 
+    box-sizing: border-box;   /* Inclut padding/border dans la largeur totale */
+    margin: 0;                /* Supprime marges par défaut */
+    padding: 0;               /* Supprime padding par défaut */
+}
 
+/* Style du body */
 body {
-    font-family: 'Poppins', sans-serif;
-    background: var(--light-bg);
-    color: var(--text-light);
-    transition: 0.3s;
-    overflow-x: hidden;
+    font-family: 'Poppins', sans-serif;  /* Police Poppins */
+    background: var(--light-bg);         /* Fond clair par défaut */
+    color: var(--text-light);            /* Texte en clair par défaut */
+    transition: 0.3s;                    /* Transition pour changements (theme) */
+    overflow-x: hidden;                  /* Empêche le scroll horizontal */
 }
-body.dark { background: var(--dark-bg); color: var(--text-dark); }
 
+/* Mode sombre pour le body */
+body.dark { 
+    background: var(--dark-bg); 
+    color: var(--text-dark); 
+}
+
+/* ---------- HEADER ---------- */
 header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    padding: 20px 50px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    backdrop-filter: blur(12px);
-    background: rgba(255,255,255,0.9);
-    border-bottom: 1px solid #ccc;
-    z-index: 1000;
-    transition: 0.3s;
+    position: fixed;                     /* Fixe le header en haut */
+    top: 0; 
+    width: 100%;                         /* Prend toute la largeur */
+    padding: 20px 50px;                  /* Espacement intérieur */
+    display: flex;                        /* Flexbox pour alignement horizontal */
+    justify-content: space-between;       /* Espacement entre titre et nav */
+    align-items: center;                  /* Aligne verticalement au centre */
+    backdrop-filter: blur(12px);          /* Flou derrière le header */
+    background: rgba(255,255,255,0.9);   /* Fond semi-transparent clair */
+    border-bottom: 1px solid #ccc;       /* Bordure en bas du header */
+    z-index: 1000;                        /* Au-dessus des autres éléments */
+    transition: 0.3s;                     /* Transition pour le dark mode */
 }
-body.dark header { background: rgba(18,18,18,0.9); border-color: #333; }
 
+/* Header en mode sombre */
+body.dark header { 
+    background: rgba(18,18,18,0.9); 
+    border-color: #333; 
+}
+
+/* Titre du header */
 header h1 {
-    font-size: 1.8rem;
-    font-weight: 700;
-    opacity: 0;
-    transform: translateY(40px);
+    font-size: 1.8rem;          /* Taille du titre */
+    font-weight: 700;            /* Gras */
+    opacity: 0;                  /* Invisible au départ (animation) */
+    transform: translateY(40px); /* Position décalée vers le bas */
+    transition: all 0.8s ease-out; /* Animation douce */
+}
+
+/* ---------- NAVIGATION ---------- */
+nav a {
+    margin-left: 30px;           /* Espace entre les liens */
+    color: inherit;              /* Hérite de la couleur du body */
+    text-decoration: none;       /* Supprime le soulignement */
+    font-weight: 500;            /* Gras moyen */
+    position: relative;          /* Nécessaire pour ::after */
+    opacity: 0;                  /* Invisible au départ */
+    transform: translateY(40px); /* Décalage vers le bas */
     transition: all 0.8s ease-out;
 }
 
-nav a {
-    margin-left: 30px;
-    color: inherit;
-    text-decoration: none;
-    font-weight: 500;
-    position: relative;
-    opacity: 0;
-    transform: translateY(40px);
-    transition: all 0.8s ease-out;
-}
+/* Soulignement animé */
 nav a::after {
     content: "";
     position: absolute;
@@ -78,54 +107,65 @@ nav a::after {
     background: var(--primary);
     transition: 0.3s;
 }
+
+/* Soulignement en mode sombre */
 body.dark nav a::after { background: var(--secondary); }
+
+/* Effet hover ou actif */
 nav a:hover::after, nav a.active::after { width: 100%; }
 
-/* ✅ Modification : boutons côte à côte avec un gap */
+/* ---------- BOUTONS HEADER ---------- */
 .header-buttons {
-    display: flex;
+    display: flex;          /* Affiche boutons côte à côte */
     align-items: center;
-    gap: 10px; /* espace entre les deux boutons */
+    gap: 10px;              /* Espace entre les boutons */
 }
 
+/* Style commun aux boutons */
 .theme-toggle, .lang-toggle {
     padding: 10px 20px;
-    border-radius: 50px;
-    border: none;
-    cursor: pointer;
+    border-radius: 50px;                     /* Bords arrondis */
+    border: none;                             /* Pas de bordure */
+    cursor: pointer;                          /* Curseur pointeur */
     background: linear-gradient(45deg, var(--primary), var(--secondary));
     color: white;
     font-weight: 600;
     transition: transform 0.3s, box-shadow 0.3s;
 }
+
+/* Hover sur boutons */
 .theme-toggle:hover, .lang-toggle:hover {
-    transform: scale(1.2) rotate(6deg);
-    box-shadow: 0 0 25px var(--glow-light);
+    transform: scale(1.2) rotate(6deg);       /* Zoom et rotation */
+    box-shadow: 0 0 25px var(--glow-light);  /* Glow bleu clair */
 }
+
+/* Hover en mode sombre */
 body.dark .theme-toggle:hover, body.dark .lang-toggle:hover {
     box-shadow: 0 0 30px var(--glow-dark);
 }
-/* on supprime margin-left de .lang-toggle pour que les boutons soient côte à côte */
-/* .lang-toggle { margin-left: 15px; } */
 
+/* ---------- MAIN ---------- */
 main {
-    min-height: 100vh;
-    padding: 140px 20px 50px;
+    min-height: 100vh;              /* Hauteur minimum */
+    padding: 140px 20px 50px;       /* Top padding pour header */
     display: flex;
-    flex-direction: column;
+    flex-direction: column;          /* Vertical */
     align-items: center;
     text-align: center;
-    max-width: 600px;
-    margin: auto;
+    max-width: 600px;                /* Largeur maximale */
+    margin: auto;                    /* Centrer horizontalement */
 }
 
+/* Titre principal */
 main h2 {
     font-size: 3rem;
     margin-bottom: 20px;
-    opacity: 0;
+    opacity: 0;                     /* Animation initiale */
     transform: translateY(40px);
     transition: all 0.8s ease-out;
 }
+
+/* Classe pour afficher avec effet glow */
 h2.show {
     opacity: 1;
     transform: translateY(0);
@@ -135,37 +175,49 @@ body.dark h2.show {
     text-shadow: 0 0 5px var(--glow-dark), 0 0 10px var(--glow-dark);
 }
 
+/* ---------- FORMULAIRE ---------- */
 form {
     width: 100%;
     display: flex;
-    flex-direction: column;
-    gap: 20px;
+    flex-direction: column; /* Champs verticalement */
+    gap: 20px;              /* Espace entre champs */
     margin-top: 20px;
     background: var(--light-card);
     padding: 30px;
     border-radius: 20px;
     box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-    opacity: 0;
+    opacity: 0;              /* Animation initiale */
     transform: translateY(40px);
     transition: all 0.8s ease-out;
 }
+
+/* Mode sombre du formulaire */
 body.dark form {
     background: var(--dark-card);
     box-shadow: 0 8px 20px rgba(0,0,0,0.5);
 }
+
+/* Affichage après animation */
 form.show { opacity: 1; transform: translateY(0); }
 
+/* Champs input et textarea */
 input, textarea {
     padding: 15px;
     border-radius: 10px;
     border: 1px solid #ccc;
     font-size: 1rem;
     width: 100%;
-    background: transparent;
+    background: transparent;  /* Fond transparent */
     color: inherit;
 }
-input:focus, textarea:focus { border-color: var(--primary); outline: none; }
 
+/* Focus sur input/textarea */
+input:focus, textarea:focus { 
+    border-color: var(--primary); 
+    outline: none; 
+}
+
+/* Bouton envoyer */
 .submit-btn {
     padding: 15px 40px;
     border-radius: 50px;
@@ -175,13 +227,17 @@ input:focus, textarea:focus { border-color: var(--primary); outline: none; }
     border: none;
     cursor: pointer;
     transition: transform .3s, box-shadow .3s;
-    position: relative;
-    overflow: hidden;
+    position: relative;       /* Nécessaire pour ::after */
+    overflow: hidden;         /* Cache le débordement */
 }
+
+/* Hover sur bouton */
 .submit-btn:hover {
     transform: scale(1.1) translateY(-3px);
     box-shadow: 0 10px 20px rgba(0,0,0,.25);
 }
+
+/* Effet lumineux sur bouton */
 .submit-btn::after {
     content: '';
     position: absolute;
@@ -195,6 +251,7 @@ input:focus, textarea:focus { border-color: var(--primary); outline: none; }
 }
 .submit-btn:hover::after { left: 100%; top: 100%; }
 
+/* Message succès */
 .message {
     display: none;
     color: green;
@@ -206,6 +263,7 @@ input:focus, textarea:focus { border-color: var(--primary); outline: none; }
 }
 .message.show { display: block; opacity: 1; transform: translateY(0); }
 
+/* ---------- FOOTER ---------- */
 footer {
     text-align: center;
     padding: 30px 0;
@@ -218,6 +276,7 @@ footer {
 body.dark footer { border-color: #333; }
 footer.show { opacity: 1; transform: translateY(0); }
 
+/* ---------- MEDIA QUERIES ---------- */
 @media(max-width:768px) {
     header { padding: 15px 20px; }
     nav a { margin-left: 15px; font-size: 0.9rem; }
@@ -235,6 +294,7 @@ footer.show { opacity: 1; transform: translateY(0); }
         <a href="projets_fr.html">Projets</a>
         <a href="contact_fr.html" class="active">Contact</a>
     </nav>
+    <!-- Boutons de thème et langue -->
     <div class="header-buttons">
         <button class="theme-toggle">🌙</button>
         <button class="lang-toggle">ES</button>
@@ -244,6 +304,7 @@ footer.show { opacity: 1; transform: translateY(0); }
 <main>
 <h2>Contactez-moi</h2>
 
+<!-- Formulaire de contact -->
 <form id="contact-form">
     <input type="text" name="name" placeholder="Nom" required>
     <input type="email" name="email" placeholder="Email" required>
@@ -251,27 +312,34 @@ footer.show { opacity: 1; transform: translateY(0); }
     <button type="submit" class="submit-btn">Envoyer</button>
 </form>
 
+<!-- Message de succès -->
 <div class="message" id="success-message">Merci ! Votre message a été envoyé.</div>
 </main>
 
 <footer>© 2025 Lucas Lara Peyrière – Tous droits réservés</footer>
 
 <script>
-const toggle = document.querySelector('.theme-toggle');
+/* ---------- VARIABLES ---------- */
+const toggle = document.querySelector('.theme-toggle'); // Bouton thème
+const form = document.getElementById('contact-form');   // Formulaire
+const msg = document.getElementById('success-message'); // Message succès
+const langBtn = document.querySelector('.lang-toggle'); // Bouton langue
 
 /* ---------- THEME ---------- */
-const savedTheme = localStorage.getItem('theme');
+const savedTheme = localStorage.getItem('theme');       // Récupère thème
 if (savedTheme === 'dark') {
-  document.body.classList.add('dark');
-  toggle.textContent = '☀️';
+  document.body.classList.add('dark');                 // Applique le mode sombre
+  toggle.textContent = '☀️';                           // Change l’icône
 }
 
+// Au clic sur le bouton thème
 toggle.addEventListener('click', () => {
-  document.body.classList.toggle('dark');
+  document.body.classList.toggle('dark');              // Active/désactive dark
   toggle.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
   localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
 });
 
+// Écoute des changements du localStorage
 window.addEventListener('storage', (e) => {
   if (e.key === 'theme') {
     const isDark = e.newValue === 'dark';
@@ -281,12 +349,9 @@ window.addEventListener('storage', (e) => {
 });
 
 /* ---------- FORMULAIRE ---------- */
-const form = document.getElementById('contact-form');
-const msg = document.getElementById('success-message');
-
 form.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const formData = new FormData(form);
+  e.preventDefault();                    // Empêche l’envoi par défaut
+  const formData = new FormData(form);   // Récupère les données
 
   try {
     const response = await fetch('https://formspree.io/f/xlgrrnrj', {
@@ -296,8 +361,8 @@ form.addEventListener('submit', async (e) => {
     });
 
     if (response.ok) {
-      msg.classList.add('show');
-      form.reset();
+      msg.classList.add('show');  // Affiche le message succès
+      form.reset();               // Réinitialise le formulaire
     } else {
       alert('Erreur lors de l’envoi, veuillez réessayer.');
     }
@@ -314,19 +379,21 @@ window.addEventListener('load', () => {
   const formEl = document.querySelector('form');
   const footer = document.querySelector('footer');
 
+  // Animation du titre
   setTimeout(() => { headerH1.style.opacity = 1; headerH1.style.transform = 'translateY(0)'; }, 100);
 
+  // Animation des liens de navigation
   navLinks.forEach((link, i) => {
     setTimeout(() => { link.style.opacity = 1; link.style.transform = 'translateY(0)'; }, 300 + i * 100);
   });
 
+  // Animation du titre h2, formulaire et footer
   setTimeout(() => { h2.classList.add('show'); }, 900);
   setTimeout(() => { formEl.classList.add('show'); }, 1100);
   setTimeout(() => { footer.classList.add('show'); }, 1500);
 });
 
 /* ---------- LANGUE ---------- */
-const langBtn = document.querySelector('.lang-toggle');
 const savedLang = localStorage.getItem('lang') || 'fr';
 const page = window.location.pathname.split('/').pop();
 const pages = {
@@ -339,15 +406,23 @@ let currentKey = null;
 for (const key in pages) {
   if (Object.values(pages[key]).includes(page)) currentKey = key;
 }
+
+// Affiche la langue actuelle sur le bouton
 langBtn.textContent = savedLang.toUpperCase();
+
+// Redirige si la page n’est pas dans la bonne langue
 if (currentKey && pages[currentKey][savedLang] !== page) {
   window.location.replace(pages[currentKey][savedLang]);
 }
+
+// Au clic sur le bouton langue
 langBtn.addEventListener('click', () => {
   const newLang = savedLang === 'fr' ? 'es' : 'fr';
   localStorage.setItem('lang', newLang);
   if (currentKey) window.location.href = pages[currentKey][newLang];
 });
+
+// Écoute les changements de langue via localStorage
 window.addEventListener('storage', (e) => {
   if (e.key === 'lang') location.reload();
 });

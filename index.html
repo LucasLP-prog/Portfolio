@@ -1,119 +1,203 @@
 <!DOCTYPE html>
+<!-- Déclare que le document utilise HTML5 -->
+
 <html lang="fr">
+<!-- Début du document HTML, langue principale : français -->
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Accueil</title>
+  <meta charset="UTF-8">
+  <!-- Encodage UTF-8 pour afficher correctement les caractères spéciaux -->
 
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Permet un affichage responsive sur mobile et tablette -->
 
-<style>
-  body, h1 { font-family: "Raleway", sans-serif; }
-  body, html { height: 100%; margin: 0; }
-  .bgimg { 
-    background-image: url('foret2.jpg'); 
-    min-height: 100%; 
-    background-position: center; 
-    background-size: cover; 
-  }
-  .countdown-box { 
-    font-size: 1.5rem; 
-    font-weight: bold; 
-    margin-top: 30px; 
-    padding: 20px 40px; 
-    border-radius: 12px; 
-    background: rgba(255, 255, 255, 0); 
-    display: inline-block; 
-    letter-spacing: 2px; 
-  }
-  .invisible-btn { 
-    background: transparent !important; 
-    color: transparent !important; 
-    border: none !important; 
-    padding: 20px 40px; 
-    display: inline-block; 
-    cursor: pointer; 
-  }
-  .lang-btn { 
-    position: fixed; 
-    top: 20px; 
-    right: 20px; 
-    padding: 10px 25px; 
-    border-radius: 50px; 
-    border: none; 
-    cursor: pointer; 
-    background: linear-gradient(45deg, #4f46e5, #ff6584); 
-    color: white; 
-    font-weight: 600; 
-    transition: transform 0.3s; 
-    z-index: 1000;
-  }
-  .lang-btn:hover { transform: scale(1.1); }
-</style>
+  <title>Accueil</title>
+  <!-- Titre affiché dans l’onglet du navigateur -->
+
+  <!-- Import de la bibliothèque CSS W3.CSS -->
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+
+  <!-- Import de la police Google Fonts "Raleway" -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+  <style>
+    /* Applique la police Raleway au body et aux titres h1 */
+    body, h1 {
+      font-family: "Raleway", sans-serif;
+    }
+
+    /* Définit la hauteur totale de la page et supprime les marges */
+    body, html {
+      height: 100%;
+      margin: 0;
+    }
+
+    /* Style de l’image de fond */
+    .bgimg {
+      background-image: url('foret2.jpg'); /* Image de fond */
+      min-height: 100%;                    /* Hauteur minimum = écran */
+      background-position: center;         /* Centre l’image */
+      background-size: cover;              /* L’image couvre tout l’écran */
+    }
+
+    /* Boîte du compte à rebours */
+    .countdown-box {
+      font-size: 1.5rem;        /* Taille du texte */
+      font-weight: bold;        /* Texte en gras */
+      margin-top: 30px;         /* Marge au-dessus */
+      padding: 20px 40px;       /* Espacement intérieur */
+      border-radius: 12px;      /* Coins arrondis */
+      background: rgba(255, 255, 255, 0); /* Fond transparent */
+      display: inline-block;    /* Taille adaptée au contenu */
+      letter-spacing: 2px;      /* Espacement entre les lettres */
+    }
+
+    /* Bouton totalement invisible mais cliquable */
+    .invisible-btn {
+      background: transparent !important; /* Fond invisible */
+      color: transparent !important;      /* Texte invisible */
+      border: none !important;             /* Pas de bordure */
+      padding: 20px 40px;                  /* Zone cliquable */
+      display: inline-block;
+      cursor: pointer;                     /* Curseur en main */
+    }
+
+    /* Bouton de changement de langue */
+    .lang-btn {
+      position: fixed;           /* Position fixe à l’écran */
+      top: 20px;                 /* Distance du haut */
+      right: 20px;               /* Distance de la droite */
+      padding: 10px 25px;
+      border-radius: 50px;       /* Bouton arrondi */
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(45deg, #4f46e5, #ff6584); /* Dégradé */
+      color: white;
+      font-weight: 600;
+      transition: transform 0.3s; /* Animation fluide */
+      z-index: 1000;              /* Toujours au-dessus */
+    }
+
+    /* Effet de zoom au survol */
+    .lang-btn:hover {
+      transform: scale(1.1);
+    }
+  </style>
 </head>
 
 <body>
+  <!-- Conteneur principal avec image de fond et animation -->
   <div class="bgimg w3-display-container w3-animate-opacity w3-text-white">
-    <div class="w3-display-topleft w3-padding-large w3-xlarge">LUCAS LARA PEYRIERE</div>
 
+    <!-- Nom affiché en haut à gauche -->
+    <div class="w3-display-topleft w3-padding-large w3-xlarge">
+      LUCAS LARA PEYRIERE
+    </div>
+
+    <!-- Contenu centré verticalement et horizontalement -->
     <div class="w3-display-middle w3-center">
-      <h1 id="title" class="w3-jumbo w3-animate-top">LE PORTFOLIO ARRIVE BIENTÔT</h1>
+
+      <!-- Titre principal avec animation -->
+      <h1 id="title" class="w3-jumbo w3-animate-top">
+        LE PORTFOLIO ARRIVE BIENTÔT
+      </h1>
+
+      <!-- Ligne horizontale décorative -->
       <hr class="w3-border-grey" style="margin:auto;width:40%">
-      <div id="countdown" class="countdown-box">Chargement...</div>
+
+      <!-- Zone du compte à rebours -->
+      <div id="countdown" class="countdown-box">
+        Chargement...
+      </div>
+
+      <!-- Message affiché après la fin du compte à rebours -->
       <div id="loading-msg" class="countdown-box" style="display:none; margin-top:20px;"></div>
 
-      <!-- Bouton invisible sous le compteur -->
+      <!-- Conteneur du bouton invisible -->
       <div id="skip-btn" style="margin-top:20px;">
-        <button id="portfolioBtn" class="invisible-btn">Accéder au portfolio</button>
+        <button id="portfolioBtn" class="invisible-btn">
+          Accéder au portfolio
+        </button>
       </div>
     </div>
   </div>
 
-  <!-- Bouton langue -->
+  <!-- Bouton de changement de langue -->
   <button id="langBtn" class="lang-btn">Español</button>
 
   <script>
-    // Compte à rebours
+    // ================= COMPTE À REBOURS =================
+
+    // Date cible du lancement du portfolio
     const targetDate = new Date("2026-01-19 18:00:00").getTime();
+
+    // Récupération des éléments HTML
     const countdownElement = document.getElementById("countdown");
     const titleElement = document.getElementById("title");
     const loadingMsg = document.getElementById("loading-msg");
     const portfolioBtn = document.getElementById("portfolioBtn");
 
+    // Exécute le code toutes les secondes
     const timer = setInterval(() => {
+
+      // Date actuelle
       const now = new Date().getTime();
+
+      // Différence entre la date cible et maintenant
       const distance = targetDate - now;
 
+      // Si le compte à rebours est terminé
       if (distance <= 0) {
-        clearInterval(timer);
+        clearInterval(timer); // Arrête le timer
+
         titleElement.innerText = "LE PORTFOLIO EST DISPONIBLE";
         countdownElement.style.display = "none";
+
         loadingMsg.style.display = "block";
         loadingMsg.innerText = "Préparation de la page...";
-        portfolioBtn.style.display = "inline-block"; // bouton invisible cliquable
+
+        portfolioBtn.style.display = "inline-block"; // Rend le bouton cliquable
+
+        // Redirection automatique après 3 secondes
+        setTimeout(() => {
+          window.location.href = "accueil_es.html?lang=es";
+        }, 3000);
+
         return;
       }
 
+      // Calcul des jours, heures, minutes, secondes
       const days = Math.floor(distance / (1000 * 60 * 60 * 24));
       const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
+      // Affichage du compte à rebours
       countdownElement.innerText = `${days} j ${hours} h ${minutes} m ${seconds} s`;
+
     }, 1000);
 
-    // Bouton invisible pour accéder directement à accueil_es.html
+    // ================= BOUTON INVISIBLE =================
+
+    // Accès direct au portfolio si l’utilisateur clique
     portfolioBtn.addEventListener("click", () => {
       window.location.href = "accueil_es.html";
     });
 
-    // Bouton langue
+    // ================= BOUTON LANGUE =================
+
     const langBtn = document.getElementById('langBtn');
+
+    // Récupère le nom de la page actuelle
     const currentPage = window.location.pathname.split('/').pop();
+
+    // Vérifie si la page est en espagnol
     const isSpanish = currentPage.includes('_es');
+
+    // Met à jour le texte du bouton
     langBtn.textContent = isSpanish ? 'Français' : 'Español';
 
+    // Change de langue au clic
     langBtn.addEventListener('click', () => {
       if (isSpanish) {
         window.location.href = 'index.html';

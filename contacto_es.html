@@ -1,161 +1,187 @@
-<!DOCTYPE html>
-<html lang="es">
+<!DOCTYPE html> <!-- Déclaration HTML5 -->
+<html lang="es"> <!-- Langue principale : espagnol -->
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portafolio - Contacto</title>
+<meta charset="UTF-8"> <!-- Encodage des caractères UTF-8 -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsive : s'adapte aux mobiles -->
+<title>Portafolio - Contacto</title> <!-- Titre de l'onglet -->
 
+<!-- Import de la police Poppins depuis Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
+/* ---------- VARIABLES CSS ---------- */
 :root {
-    --primary: #4f46e5;
-    --secondary: #ff6584;
-    --light-bg: #f5f5f5;
-    --dark-bg: #121212;
+    --primary: #4f46e5;      /* Couleur principale (violet) */
+    --secondary: #ff6584;    /* Couleur secondaire (rose) */
+    --light-bg: #f5f5f5;     /* Fond clair du site */
+    --dark-bg: #121212;      /* Fond sombre du site */
 
-    --light-card: #fff;
-    --dark-card: #1e1e1e;
+    --light-card: #fff;      /* Fond des cartes clair */
+    --dark-card: #1e1e1e;    /* Fond des cartes sombre */
 
-    --text-light: #222;
-    --text-dark: #e0e0e0;
-    --glow-light: rgba(79,70,229,0.5);
-    --glow-dark: rgba(255,101,132,0.6);
+    --text-light: #222;      /* Texte sur fond clair */
+    --text-dark: #e0e0e0;    /* Texte sur fond sombre */
+    --glow-light: rgba(79,70,229,0.5); /* Glow clair pour hover */
+    --glow-dark: rgba(255,101,132,0.6); /* Glow sombre pour hover */
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+/* ---------- RESET ---------- */
+* { 
+    box-sizing: border-box; /* Inclut le padding et la bordure dans la taille */
+    margin: 0;              /* Supprime la marge par défaut */
+    padding: 0;             /* Supprime le padding par défaut */
+}
 
+/* ---------- BODY ---------- */
 body {
-    font-family: 'Poppins', sans-serif;
-    background: var(--light-bg);
-    color: var(--text-light);
-    transition: 0.3s;
-    overflow-x: hidden;
+    font-family: 'Poppins', sans-serif; /* Police globale */
+    background: var(--light-bg);        /* Fond clair par défaut */
+    color: var(--text-light);           /* Texte sombre */
+    transition: 0.3s;                   /* Animation douce pour changements */
+    overflow-x: hidden;                 /* Empêche le scroll horizontal */
 }
-body.dark { background: var(--dark-bg); color: var(--text-dark); }
+body.dark { 
+    background: var(--dark-bg); /* Fond sombre */
+    color: var(--text-dark);    /* Texte clair */
+}
 
+/* ---------- HEADER ---------- */
 header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    padding: 20px 50px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    backdrop-filter: blur(12px);
-    background: rgba(255,255,255,0.9);
-    border-bottom: 1px solid #ccc;
-    z-index: 1000;
-    transition: 0.3s;
+    position: fixed;             /* Fixe le header en haut */
+    top: 0;                      /* Positionné tout en haut */
+    width: 100%;                 /* Pleine largeur */
+    padding: 20px 50px;          /* Espacement interne */
+    display: flex;               /* Flexbox pour alignement horizontal */
+    justify-content: space-between; /* Espace entre logo et navigation */
+    align-items: center;         /* Centré verticalement */
+    backdrop-filter: blur(12px); /* Flou derrière le header */
+    background: rgba(255,255,255,0.9); /* Fond semi-transparent */
+    border-bottom: 1px solid #ccc; /* Ligne en bas */
+    z-index: 1000;               /* Toujours au-dessus du contenu */
+    transition: 0.3s;            /* Transition douce */
 }
-body.dark header { background: rgba(18,18,18,0.9); border-color: #333; }
+body.dark header { 
+    background: rgba(18,18,18,0.9); /* Fond sombre semi-transparent */
+    border-color: #333;             /* Ligne sombre */
+}
 
+/* ---------- HEADER H1 ---------- */
 header h1 {
-    font-size: 1.8rem;
-    font-weight: 700;
-    opacity: 0;
-    transform: translateY(40px);
-    transition: all 0.8s ease-out;
+    font-size: 1.8rem;          /* Taille du texte */
+    font-weight: 700;            /* Texte en gras */
+    opacity: 0;                  /* Invisible au départ */
+    transform: translateY(40px); /* Décalé vers le bas pour animation */
+    transition: all 0.8s ease-out; /* Animation douce */
 }
 
+/* ---------- NAVIGATION ---------- */
 nav a {
-    margin-left: 30px;
-    color: inherit;
-    text-decoration: none;
-    font-weight: 500;
-    position: relative;
+    margin-left: 30px;           /* Espace entre les liens */
+    color: inherit;              /* Hérite de la couleur du texte */
+    text-decoration: none;       /* Supprime le soulignement */
+    font-weight: 500;            /* Texte semi-gras */
+    position: relative;          /* Nécessaire pour ::after */
 
-    opacity: 0;
-    transform: translateY(40px);
-    transition: all 0.8s ease-out;
+    opacity: 0;                  /* Invisible au départ pour animation */
+    transform: translateY(40px); /* Décalé vers le bas */
+    transition: all 0.8s ease-out; /* Animation douce */
 }
+
+/* Ligne animée sous les liens */
 nav a::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -6px;
-    width: 0%;
-    height: 2px;
-    background: var(--primary);
-    transition: 0.3s;
+    content: "";                  /* Nécessaire pour pseudo-élément */
+    position: absolute;           /* Position absolue par rapport au lien */
+    left: 0;                      /* Commence à gauche */
+    bottom: -6px;                 /* En dessous du texte */
+    width: 0%;                    /* Largeur initiale 0 */
+    height: 2px;                  /* Épaisseur */
+    background: var(--primary);   /* Couleur principale */
+    transition: 0.3s;             /* Transition douce largeur */
 }
-body.dark nav a::after { background: var(--secondary); }
-nav a:hover::after, nav a.active::after { width: 100%; }
+body.dark nav a::after { background: var(--secondary); } /* Couleur secondaire en sombre */
+nav a:hover::after, nav a.active::after { width: 100%; } /* Ligne complète au hover ou actif */
 
-/* ✅ Boutons thème et langue côte à côte */
+/* ---------- BOUTONS THEME & LANGUE ---------- */
 .header-buttons {
-    display: flex;
-    align-items: center;
-    gap: 10px; /* espace entre les boutons */
+    display: flex;                /* Flex pour aligner boutons */
+    align-items: center;          /* Centré verticalement */
+    gap: 10px;                    /* Espace entre boutons */
 }
 .theme-toggle, .lang-toggle {
-    padding: 10px 20px;
-    border-radius: 50px;
-    border: none;
-    cursor: pointer;
-    background: linear-gradient(45deg, var(--primary), var(--secondary));
-    color: white;
-    font-weight: 600;
-    transition: transform 0.3s, box-shadow 0.3s;
+    padding: 10px 20px;           /* Padding interne */
+    border-radius: 50px;          /* Arrondi */
+    border: none;                 /* Pas de bordure */
+    cursor: pointer;              /* Curseur main */
+    background: linear-gradient(45deg, var(--primary), var(--secondary)); /* Dégradé */
+    color: white;                 /* Texte blanc */
+    font-weight: 600;             /* Semi-gras */
+    transition: transform 0.3s, box-shadow 0.3s; /* Animations hover */
 }
 .theme-toggle:hover, .lang-toggle:hover {
-    transform: scale(1.2) rotate(6deg);
-    box-shadow: 0 0 25px var(--glow-light);
+    transform: scale(1.2) rotate(6deg); /* Agrandissement + rotation */
+    box-shadow: 0 0 25px var(--glow-light); /* Glow clair */
 }
 body.dark .theme-toggle:hover, body.dark .lang-toggle:hover {
-    box-shadow: 0 0 30px var(--glow-dark);
+    box-shadow: 0 0 30px var(--glow-dark); /* Glow sombre */
 }
 
+/* ---------- MAIN ---------- */
 main {
-    min-height: 100vh;
-    padding: 140px 20px 50px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    max-width: 600px;
-    margin: auto;
+    min-height: 100vh;             /* Hauteur minimum de la fenêtre */
+    padding: 140px 20px 50px;      /* Padding pour header + bas */
+    display: flex;                 /* Flex colonne */
+    flex-direction: column;        /* Colonne verticale */
+    align-items: center;           /* Centrage horizontal */
+    justify-content: center;       /* Centrage vertical */
+    text-align: center;            /* Texte centré */
+    max-width: 600px;              /* Largeur max */
+    margin: auto;                  /* Centrage horizontal */
 }
 
+/* Titre principal animé */
 main h2 {
     font-size: 3rem;
     margin-bottom: 20px;
-    opacity: 0;
-    transform: translateY(40px);
-    transition: all 0.8s ease-out;
+    opacity: 0;                    /* Invisible initialement */
+    transform: translateY(40px);   /* Décalé vers le bas */
+    transition: all 0.8s ease-out; /* Animation douce */
 }
 h2.show {
-    opacity: 1;
-    transform: translateY(0);
-    text-shadow: 0 0 5px var(--glow-light), 0 0 10px var(--glow-light);
+    opacity: 1;                     /* Devient visible */
+    transform: translateY(0);       /* Remis en place */
+    text-shadow: 0 0 5px var(--glow-light), 0 0 10px var(--glow-light); /* Glow clair */
 }
 body.dark h2.show {
-    text-shadow: 0 0 5px var(--glow-dark), 0 0 10px var(--glow-dark);
+    text-shadow: 0 0 5px var(--glow-dark), 0 0 10px var(--glow-dark); /* Glow sombre */
 }
 
+/* ---------- FORMULAIRE ---------- */
 form {
-    width: 100%;
+    width: 100%;                    /* Largeur complète */
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 20px;                      /* Espace entre champs */
     margin-top: 20px;
 
-    background: var(--light-card);
-    padding: 30px;
-    border-radius: 20px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    background: var(--light-card);  /* Fond carte clair */
+    padding: 30px;                  /* Padding interne */
+    border-radius: 20px;            /* Bord arrondi */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1); /* Ombre douce */
 
-    opacity: 0;
-    transform: translateY(40px);
-    transition: all 0.8s ease-out;
+    opacity: 0;                     /* Invisible initialement */
+    transform: translateY(40px);    /* Décalé vers le bas */
+    transition: all 0.8s ease-out;  /* Animation douce */
 }
 body.dark form {
     background: var(--dark-card);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.5); /* Ombre plus marquée */
 }
-form.show { opacity: 1; transform: translateY(0); }
+form.show { 
+    opacity: 1; 
+    transform: translateY(0); 
+}
 
+/* Champs du formulaire */
 input, textarea {
     padding: 15px;
     border-radius: 10px;
@@ -163,11 +189,15 @@ input, textarea {
     font-size: 1rem;
     width: 100%;
     transition: 0.3s;
-    background: transparent;
-    color: inherit;
+    background: transparent; /* Transparent pour hériter du thème */
+    color: inherit;          /* Couleur texte héritée */
 }
-input:focus, textarea:focus { border-color: var(--primary); outline: none; }
+input:focus, textarea:focus { 
+    border-color: var(--primary); /* Bordure colorée au focus */
+    outline: none;                /* Supprime contour par défaut */
+}
 
+/* Bouton d'envoi */
 .submit-btn {
     padding: 15px 40px;
     border-radius: 50px;
@@ -181,8 +211,8 @@ input:focus, textarea:focus { border-color: var(--primary); outline: none; }
     overflow: hidden;
 }
 .submit-btn:hover {
-    transform: scale(1.1) translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0,0,0,.25);
+    transform: scale(1.1) translateY(-3px); /* Agrandit et remonte légèrement */
+    box-shadow: 0 10px 20px rgba(0,0,0,.25); /* Ombre portée */
 }
 .submit-btn::after {
     content: '';
@@ -197,31 +227,38 @@ input:focus, textarea:focus { border-color: var(--primary); outline: none; }
 }
 .submit-btn:hover::after { left: 100%; top: 100%; }
 
+/* Message de confirmation */
 .message {
-    display: none;
-    color: green;
-    font-weight: 600;
+    display: none;        /* Caché par défaut */
+    color: green;         /* Texte vert */
+    font-weight: 600;     /* Semi-gras */
     margin-top: 10px;
 
-    opacity: 0;
+    opacity: 0;           /* Invisible initialement */
     transform: translateY(40px);
     transition: all 0.8s ease-out;
 }
-.message.show { display: block; opacity: 1; transform: translateY(0); }
+.message.show { 
+    display: block; 
+    opacity: 1; 
+    transform: translateY(0); 
+}
 
+/* ---------- FOOTER ---------- */
 footer {
     text-align: center;
     padding: 30px 0;
     border-top: 1px solid #ccc;
     margin-top: 50px;
 
-    opacity: 0;
+    opacity: 0;           /* Invisible initialement */
     transform: translateY(40px);
     transition: all 0.8s ease-out;
 }
 body.dark footer { border-color: #333; }
 footer.show { opacity: 1; transform: translateY(0); }
 
+/* ---------- RESPONSIVE ---------- */
 @media(max-width:768px) {
     header { padding: 15px 20px; }
     nav a { margin-left: 15px; font-size: 0.9rem; }
@@ -240,8 +277,8 @@ footer.show { opacity: 1; transform: translateY(0); }
     <a href="contacto_es.html" class="active">Contacto</a>
 </nav>
 <div class="header-buttons">
-    <button class="theme-toggle">🌙</button>
-    <button class="lang-toggle">FR</button>
+    <button class="theme-toggle">🌙</button> <!-- Toggle thème clair/sombre -->
+    <button class="lang-toggle">FR</button> <!-- Toggle langue -->
 </div>
 </header>
 
@@ -261,21 +298,24 @@ footer.show { opacity: 1; transform: translateY(0); }
 <footer>© 2025 Lucas Lara Peyrière – Todos los derechos reservados</footer>
 
 <script>
-const toggle = document.querySelector('.theme-toggle');
+/* ---------- TOGGLE THÈME ---------- */
+const toggle = document.querySelector('.theme-toggle'); // Bouton thème
 
-/* ---------- TEMA ---------- */
+// Récupère le thème sauvegardé
 const savedTheme = localStorage.getItem('theme');
-if (savedTheme === 'dark') {
-  document.body.classList.add('dark');
-  toggle.textContent = '☀️';
+if (savedTheme === 'dark') { 
+  document.body.classList.add('dark'); // Applique thème sombre
+  toggle.textContent = '☀️';          // Change icône
 }
 
+// Au clic sur le bouton
 toggle.addEventListener('click', () => {
-  document.body.classList.toggle('dark');
+  document.body.classList.toggle('dark'); // Active/désactive sombre
   toggle.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
   localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
 });
 
+// Synchronisation si l'utilisateur change le thème dans un autre onglet
 window.addEventListener('storage', (e) => {
   if (e.key === 'theme') {
     const isDark = e.newValue === 'dark';
@@ -284,13 +324,13 @@ window.addEventListener('storage', (e) => {
   }
 });
 
-/* ---------- FORMSPREE AJAX ---------- */
+/* ---------- FORMULAIRE AJAX (Formspree) ---------- */
 const form = document.getElementById('contact-form');
 const msg = document.getElementById('success-message');
 
 form.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const formData = new FormData(form);
+  e.preventDefault(); // Empêche le rechargement
+  const formData = new FormData(form); // Récupère les données
 
   try {
     const response = await fetch('https://formspree.io/f/xlgrrnrj', {
@@ -300,8 +340,8 @@ form.addEventListener('submit', async (e) => {
     });
 
     if (response.ok) {
-      msg.classList.add('show');
-      form.reset();
+      msg.classList.add('show'); // Affiche message succès
+      form.reset();              // Réinitialise formulaire
     } else {
       alert('Error al enviar, por favor inténtalo de nuevo.');
     }
@@ -310,7 +350,7 @@ form.addEventListener('submit', async (e) => {
   }
 });
 
-/* ---------- ANIMACIONES ---------- */
+/* ---------- ANIMATIONS AU CHARGEMENT ---------- */
 window.addEventListener('load', () => {
   const headerH1 = document.querySelector('header h1');
   const navLinks = document.querySelectorAll('nav a');
@@ -319,20 +359,18 @@ window.addEventListener('load', () => {
   const footer = document.querySelector('footer');
 
   setTimeout(() => { headerH1.style.opacity = 1; headerH1.style.transform = 'translateY(0)'; }, 100);
-
   navLinks.forEach((link, i) => {
     setTimeout(() => { link.style.opacity = 1; link.style.transform = 'translateY(0)'; }, 300 + i * 100);
   });
-
   setTimeout(() => { h2.classList.add('show'); }, 900);
   setTimeout(() => { formEl.classList.add('show'); }, 1100);
   setTimeout(() => { footer.classList.add('show'); }, 1500);
 });
 
-/* ---------- LANGUE ---------- */
+/* ---------- TOGGLE LANGUE ---------- */
 const langBtn = document.querySelector('.lang-toggle');
-const savedLang = localStorage.getItem('lang') || 'fr';
-const page = window.location.pathname.split('/').pop();
+const savedLang = localStorage.getItem('lang') || 'fr'; // Récupère langue sauvegardée
+const page = window.location.pathname.split('/').pop();  // Nom fichier actuel
 const pages = {
   accueil: { fr: 'accueil_fr.html', es: 'accueil_es.html' },
   competences: { fr: 'competences_fr.html', es: 'competencias_es.html' },
@@ -341,17 +379,21 @@ const pages = {
 };
 let currentKey = null;
 for (const key in pages) {
-  if (Object.values(pages[key]).includes(page)) currentKey = key;
+  if (Object.values(pages[key]).includes(page)) currentKey = key; // Trouve la page actuelle
 }
-langBtn.textContent = savedLang.toUpperCase();
+langBtn.textContent = savedLang.toUpperCase(); // Affiche langue
 if (currentKey && pages[currentKey][savedLang] !== page) {
-  window.location.replace(pages[currentKey][savedLang]);
+  window.location.replace(pages[currentKey][savedLang]); // Redirection si nécessaire
 }
+
+// Au clic sur bouton langue
 langBtn.addEventListener('click', () => {
   const newLang = savedLang === 'fr' ? 'es' : 'fr';
   localStorage.setItem('lang', newLang);
-  if (currentKey) window.location.href = pages[currentKey][newLang];
+  if (currentKey) window.location.href = pages[currentKey][newLang]; // Redirige vers version autre langue
 });
+
+// Synchronisation si l'utilisateur change la langue dans un autre onglet
 window.addEventListener('storage', (e) => {
   if (e.key === 'lang') location.reload();
 });

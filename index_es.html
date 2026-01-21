@@ -1,96 +1,204 @@
 <!DOCTYPE html>
+<!-- Indique que le document utilise le standard HTML5 -->
+
 <html lang="es">
+<!-- Début du document HTML, langue principale : espagnol -->
+
 <head>
 <meta charset="UTF-8">
+<!-- Définit l’encodage UTF-8 pour afficher correctement les caractères spéciaux -->
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Permet un affichage responsive sur mobile -->
+
 <title>Inicio</title>
+<!-- Titre affiché dans l’onglet du navigateur -->
 
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+<!-- Import de la bibliothèque CSS W3.CSS -->
+
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<!-- Import de la police Google Fonts "Raleway" -->
 
 <style>
-body, h1 { font-family: "Raleway", sans-serif; }
-body, html { height: 100%; margin: 0; }
-.bgimg { background-image: url('foret2.jpg'); min-height: 100%; background-position: center; background-size: cover; }
-.countdown-box { font-size: 1.5rem; font-weight: bold; margin-top: 30px; padding: 20px 40px; border-radius: 12px; background: rgba(255, 255, 255, 0); display: inline-block; letter-spacing: 2px; }
-.invisible-btn { background: transparent !important; color: transparent !important; border: none !important; padding: 20px 40px; display: inline-block; cursor: pointer; }
+/* Applique la police Raleway au body et aux titres h1 */
+body, h1 { 
+  font-family: "Raleway", sans-serif; 
+}
+
+/* Définit la hauteur de la page et supprime les marges */
+body, html { 
+  height: 100%; 
+  margin: 0; 
+}
+
+/* Style de l’image de fond */
+.bgimg { 
+  background-image: url('foret2.jpg'); /* Image de fond */
+  min-height: 100%;                    /* Hauteur minimale = écran */
+  background-position: center;         /* Centre l’image */
+  background-size: cover;              /* L’image couvre tout l’écran */
+}
+
+/* Style du compteur */
+.countdown-box { 
+  font-size: 1.5rem;       /* Taille du texte */
+  font-weight: bold;       /* Texte en gras */
+  margin-top: 30px;        /* Espace au-dessus */
+  padding: 20px 40px;      /* Espace intérieur */
+  border-radius: 12px;     /* Coins arrondis */
+  background: rgba(255, 255, 255, 0); /* Fond transparent */
+  display: inline-block;   /* Taille adaptée au contenu */
+  letter-spacing: 2px;     /* Espacement entre lettres */
+}
+
+/* Bouton invisible mais cliquable */
+.invisible-btn { 
+  background: transparent !important; /* Fond invisible */
+  color: transparent !important;      /* Texte invisible */
+  border: none !important;             /* Pas de bordure */
+  padding: 20px 40px;                  /* Zone cliquable */
+  display: inline-block; 
+  cursor: pointer;                     /* Curseur en main */
+}
 
 /* Style du bouton langue en haut à droite */
 .lang-btn { 
-    position: fixed; 
-    top: 20px; 
-    right: 20px; 
-    padding: 10px 25px; 
-    border-radius: 50px; 
-    border: none; 
-    cursor: pointer; 
-    background: linear-gradient(45deg, #4f46e5, #ff6584); 
-    color: white; 
-    font-weight: 600; 
-    transition: transform 0.3s; 
-    z-index: 1000;
+  position: fixed;        /* Fixe à l’écran */
+  top: 20px;              /* Distance depuis le haut */
+  right: 20px;            /* Distance depuis la droite */
+  padding: 10px 25px; 
+  border-radius: 50px;    /* Bouton arrondi */
+  border: none; 
+  cursor: pointer; 
+  background: linear-gradient(45deg, #4f46e5, #ff6584); /* Dégradé */
+  color: white; 
+  font-weight: 600; 
+  transition: transform 0.3s; /* Animation fluide */
+  z-index: 1000;          /* Toujours au-dessus */
 }
-.lang-btn:hover { transform: scale(1.1); }
+
+/* Effet zoom au survol */
+.lang-btn:hover { 
+  transform: scale(1.1); 
+}
 </style>
 </head>
 
 <body>
-<div class="bgimg w3-display-container w3-animate-opacity w3-text-white">
-  <div class="w3-display-topleft w3-padding-large w3-xlarge">LUCAS LARA PEYRIERE</div>
 
+<!-- Conteneur principal avec image de fond et animation -->
+<div class="bgimg w3-display-container w3-animate-opacity w3-text-white">
+
+  <!-- Nom affiché en haut à gauche -->
+  <div class="w3-display-topleft w3-padding-large w3-xlarge">
+    LUCAS LARA PEYRIERE
+  </div>
+
+  <!-- Contenu centré horizontalement et verticalement -->
   <div class="w3-display-middle w3-center">
-    <h1 id="title" class="w3-jumbo w3-animate-top">EL PORTAFOLIO LLEGA PRONTO</h1>
+
+    <!-- Titre principal avec animation -->
+    <h1 id="title" class="w3-jumbo w3-animate-top">
+      EL PORTAFOLIO LLEGA PRONTO
+    </h1>
+
+    <!-- Ligne décorative -->
     <hr class="w3-border-grey" style="margin:auto;width:40%">
-    <div id="countdown" class="countdown-box">Cargando...</div>
+
+    <!-- Zone du compteur -->
+    <div id="countdown" class="countdown-box">
+      Cargando...
+    </div>
+
+    <!-- Message affiché après la fin du compteur -->
     <div id="loading-msg" class="countdown-box" style="display:none; margin-top:20px;"></div>
     
-    <!-- Bouton invisible qui redirige vers accueil_es.html avec le paramètre "lang=es" -->
+    <!-- Bouton invisible pour accéder directement au portfolio -->
     <div id="skip-btn" style="margin-top:20px;">
-      <a href="accueil_es.html?lang=es" class="invisible-btn">Omitir y acceder al portfolio</a>
+      <a href="accueil_es.html?lang=es" class="invisible-btn">
+        Omitir y acceder al portfolio
+      </a>
     </div>
   </div>
 </div>
 
-<!-- Bouton langue en haut à droite -->
+<!-- Bouton de changement de langue -->
 <button id="langBtn" class="lang-btn">Français</button>
 
 <script>
-// Compteur
+// ================= COMPTE À REBOURS =================
+
+// Date cible du lancement du portfolio
 const targetDate = new Date("2026-01-19 18:00:00").getTime();
+
+// Récupère l’élément HTML du compteur
 const countdownElement = document.getElementById("countdown");
+
+// Récupère le titre principal
 const titleElement = document.getElementById("title");
 
+// Exécute le code toutes les secondes
 const timer = setInterval(() => {
+
+  // Date actuelle en millisecondes
   const now = new Date().getTime();
+
+  // Différence entre la date cible et maintenant
   const distance = targetDate - now;
 
+  // Si le compte à rebours est terminé
   if (distance <= 0) {
-    clearInterval(timer);
+    clearInterval(timer); // Arrête le compteur
+
+    // Change le texte du titre
     titleElement.innerText = "EL PORTAFOLIO ESTÁ DISPONIBLE";
+
+    // Cache le compteur
     countdownElement.style.display = "none";
+
+    // Affiche le message de chargement
     document.getElementById("loading-msg").style.display = "block";
     document.getElementById("loading-msg").innerText = "Preparando la página...";
+
+    // Affiche le bouton invisible
     document.getElementById("skip-btn").style.display = "block";
 
+    // Redirection automatique après 3 secondes
     setTimeout(() => { 
-      window.location.href = "accueil_es.html?lang=es"; // Redirige vers la version espagnole avec paramètre "lang=es"
-    }, 5000);
-    return;
+      window.location.href = "accueil_es.html?lang=es";
+    }, 3000);
+
+    return; // Stoppe l’exécution
   }
 
+  // Calcul des jours
   const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+
+  // Calcul des heures
   const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+
+  // Calcul des minutes
   const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+  // Calcul des secondes
   const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
+  // Affiche le compte à rebours
   countdownElement.innerText = `${days} d ${hours} h ${minutes} m ${seconds} s`;
+
 }, 1000);
 
-// Bouton langue
+// ================= BOUTON LANGUE =================
+
+// Récupère le bouton langue
 const langBtn = document.getElementById('langBtn');
+
+// Redirige vers la version française au clic
 langBtn.addEventListener('click', () => {
-  window.location.href = "index.html"; // Redirige vers la version française
+  window.location.href = "index.html";
 });
 </script>
+
 </body>
 </html>

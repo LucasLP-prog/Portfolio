@@ -1,71 +1,85 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es"> <!-- Déclare le type de document et la langue de la page -->
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portafolio - Proyectos</title>
+<meta charset="UTF-8"> <!-- Encodage UTF-8 pour supporter tous les caractères -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Pour que la page soit responsive -->
+<title>Portafolio - Proyectos</title> <!-- Titre de l'onglet -->
 
+<!-- Importation de la police Poppins depuis Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
+/* ---------- VARIABLES CSS ---------- */
 :root {
-    --primary: #4f46e5;
-    --secondary: #ff6584;
-    --light-bg: #f5f5f5;
-    --dark-bg: #121212;
-    --light-card: #fff;
-    --dark-card: #1e1e1e;
-    --text-light: #222;
-    --text-dark: #e0e0e0;
-    --glow-light: rgba(79,70,229,0.5);
-    --glow-dark: rgba(255,101,132,0.6);
+    --primary: #4f46e5; /* Couleur principale (violet) */
+    --secondary: #ff6584; /* Couleur secondaire (rose) */
+    --light-bg: #f5f5f5; /* Fond clair de la page */
+    --dark-bg: #121212; /* Fond sombre de la page */
+    --light-card: #fff; /* Fond clair des cartes */
+    --dark-card: #1e1e1e; /* Fond sombre des cartes */
+    --text-light: #222; /* Couleur du texte clair */
+    --text-dark: #e0e0e0; /* Couleur du texte sombre */
+    --glow-light: rgba(79,70,229,0.5); /* Couleur du glow clair */
+    --glow-dark: rgba(255,101,132,0.6); /* Couleur du glow sombre */
 }
 
+/* Reset global et boîte de délimitation */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* ---------- STYLES DU BODY ---------- */
 body {
-    font-family: 'Poppins', sans-serif;
-    background: var(--light-bg);
-    color: var(--text-light);
-    transition: 0.3s;
-    overflow-x: hidden;
+    font-family: 'Poppins', sans-serif; /* Police principale */
+    background: var(--light-bg); /* Fond clair par défaut */
+    color: var(--text-light); /* Couleur texte claire */
+    transition: 0.3s; /* Transition pour l'effet thème sombre */
+    overflow-x: hidden; /* Empêche le scroll horizontal */
 }
-body.dark { background: var(--dark-bg); color: var(--text-dark); }
+body.dark { /* Quand le thème sombre est activé */
+    background: var(--dark-bg);
+    color: var(--text-dark);
+}
 
+/* ---------- HEADER ---------- */
 header {
-    position: fixed;
+    position: fixed; /* Toujours visible en haut */
     top: 0;
-    width: 100%;
-    padding: 20px 50px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    backdrop-filter: blur(12px);
-    background: rgba(255,255,255,0.9);
-    border-bottom: 1px solid #ccc;
-    z-index: 1000;
-    transition: 0.3s;
+    width: 100%; /* Prend toute la largeur */
+    padding: 20px 50px; /* Espacement intérieur */
+    display: flex; /* Flexbox pour aligner éléments */
+    justify-content: space-between; /* Espace entre logo et menu */
+    align-items: center; /* Centrage vertical */
+    backdrop-filter: blur(12px); /* Flou de fond */
+    background: rgba(255,255,255,0.9); /* Fond semi-transparent */
+    border-bottom: 1px solid #ccc; /* Ligne en bas */
+    z-index: 1000; /* Priorité d'affichage */
+    transition: 0.3s; /* Transition pour thème */
 }
-body.dark header { background: rgba(18,18,18,0.9); border-color: #333; }
+body.dark header { /* Header sombre */
+    background: rgba(18,18,18,0.9);
+    border-color: #333;
+}
 
 header h1 {
     font-size: 1.8rem;
     font-weight: 700;
-    opacity: 0;
-    transform: translateY(40px);
+    opacity: 0; /* Commence invisible pour animation */
+    transform: translateY(40px); /* Déplacé vers le bas */
+    transition: all 0.8s ease-out; /* Animation fluide */
+}
+
+/* ---------- NAVIGATION ---------- */
+nav a {
+    margin-left: 30px; /* Espacement entre liens */
+    color: inherit; /* Couleur héritée du body */
+    text-decoration: none; /* Pas de soulignement */
+    font-weight: 500;
+    position: relative; /* Pour le pseudo-element after */
+    opacity: 0; /* Commence invisible */
+    transform: translateY(40px); /* Déplacé vers le bas */
     transition: all 0.8s ease-out;
 }
 
-nav a {
-    margin-left: 30px;
-    color: inherit;
-    text-decoration: none;
-    font-weight: 500;
-    position: relative;
-    opacity: 0;
-    transform: translateY(40px);
-    transition: all 0.8s ease-out;
-}
+/* Ligne animée sous les liens */
 nav a::after {
     content: "";
     position: absolute;
@@ -77,36 +91,37 @@ nav a::after {
     transition: 0.3s;
 }
 body.dark nav a::after { background: var(--secondary); }
-nav a:hover::after, nav a.active::after { width: 100%; }
+nav a:hover::after, nav a.active::after { width: 100%; } /* Animation au hover ou actif */
 
-/* ---------- BOTONES TEMA & IDIOMA ---------- */
+/* ---------- BOUTONS THEME & LANGUE ---------- */
 .header-buttons {
     display: flex;
-    gap: 10px;
+    gap: 10px; /* Espacement entre boutons */
     align-items: center;
 }
 
 .theme-toggle, .lang-toggle {
     padding: 10px 20px;
-    border-radius: 50px;
+    border-radius: 50px; /* Bouton rond */
     border: none;
     cursor: pointer;
-    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    background: linear-gradient(45deg, var(--primary), var(--secondary)); /* Dégradé */
     color: white;
     font-weight: 600;
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: transform 0.3s, box-shadow 0.3s; /* Animation au hover */
 }
 .theme-toggle:hover, .lang-toggle:hover {
-    transform: scale(1.2) rotate(6deg);
-    box-shadow: 0 0 25px var(--glow-light);
+    transform: scale(1.2) rotate(6deg); /* Agrandissement + rotation */
+    box-shadow: 0 0 25px var(--glow-light); /* Glow */
 }
 body.dark .theme-toggle:hover, body.dark .lang-toggle:hover {
-    box-shadow: 0 0 30px var(--glow-dark);
+    box-shadow: 0 0 30px var(--glow-dark); /* Glow sombre */
 }
 
+/* ---------- MAIN ---------- */
 main {
-    min-height: 100vh;
-    padding: 140px 20px 50px;
+    min-height: 100vh; /* Remplit la hauteur de l'écran */
+    padding: 140px 20px 50px; /* Padding pour header + bas */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -114,28 +129,31 @@ main {
     text-align: center;
 }
 
+/* Section limitée à 1000px */
 section { width: 100%; max-width: 1000px; }
 
+/* TITRE SECTION */
 section h2 {
     font-size: 3rem;
     margin-bottom: 20px;
-    opacity: 0;
+    opacity: 0; /* Pour animation */
     transform: translateY(40px);
     transition: all 0.8s ease-out;
 }
-h2.show {
+h2.show { /* Quand visible */
     opacity: 1;
     transform: translateY(0);
-    text-shadow: 0 0 5px var(--glow-light), 0 0 10px var(--glow-light);
+    text-shadow: 0 0 5px var(--glow-light), 0 0 10px var(--glow-light); /* Glow */
 }
-body.dark h2.show {
+body.dark h2.show { /* Glow sombre */
     text-shadow: 0 0 5px var(--glow-dark), 0 0 10px var(--glow-dark);
 }
 
+/* ---------- CARTES DE PROJETS ---------- */
 .cards {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive */
     gap: 30px;
     margin-top: 20px;
 }
@@ -147,12 +165,12 @@ body.dark h2.show {
     box-shadow: 0 8px 20px rgba(0,0,0,0.1);
     text-align: center;
     transition: 0.3s, box-shadow 0.3s;
-    opacity: 0;
+    opacity: 0; /* Pour animation */
     transform: translateY(40px);
 }
 body.dark .card { background: var(--dark-card); box-shadow: 0 8px 20px rgba(0,0,0,0.5); }
 
-/* Efecto luminoso al pasar el mouse */
+/* Hover glow */
 .card.show { opacity: 1; transform: translateY(0); }
 .card:hover { 
     transform: translateY(-10px);
@@ -167,18 +185,20 @@ body.dark .card:hover { box-shadow: 0 15px 35px var(--glow-dark); }
 }
 .card h3.show, .card p.show { opacity: 1; transform: translateY(0); }
 
+/* ---------- FOOTER ---------- */
 footer {
     text-align: center;
     padding: 30px 0;
     border-top: 1px solid #ccc;
     margin-top: 50px;
-    opacity: 0;
+    opacity: 0; /* Pour animation */
     transform: translateY(40px);
     transition: all 0.8s ease-out;
 }
 body.dark footer { border-color: #333; }
 footer.show { opacity: 1; transform: translateY(0); }
 
+/* ---------- RESPONSIVE ---------- */
 @media(max-width:768px) {
     header { padding: 15px 20px; }
     nav a { margin-left: 15px; font-size: 0.9rem; }
@@ -189,24 +209,25 @@ footer.show { opacity: 1; transform: translateY(0); }
 <body>
 
 <header>
-    <h1>Lucas Lara Peyrière</h1>
+    <h1>Lucas Lara Peyrière</h1> <!-- Nom ou logo -->
     <nav>
         <a href="accueil_es.html">Inicio</a>
         <a href="competencias_es.html">Competencias</a>
-        <a href="proyectos_es.html" class="active">Proyectos</a>
+        <a href="proyectos_es.html" class="active">Proyectos</a> <!-- Page active -->
         <a href="contacto_es.html">Contacto</a>
     </nav>
     <div class="header-buttons">
-        <button class="theme-toggle">🌙</button>
-        <button class="lang-toggle">FR</button>
+        <button class="theme-toggle">🌙</button> <!-- Bouton thème -->
+        <button class="lang-toggle">FR</button> <!-- Bouton langue -->
     </div>
 </header>
 
 <main>
 <section>
-    <h2>Mis Proyectos</h2>
+    <h2>Mis Proyectos</h2> <!-- Titre section -->
 
     <div class="cards">
+        <!-- Carte projet -->
         <div class="card">
             <h3>Proyecto 1: Robot Cup (Finalizado)</h3>
             <p>Robot construido desde cero.</p>
@@ -230,20 +251,24 @@ footer.show { opacity: 1; transform: translateY(0); }
 <footer>© 2025 Lucas Lara Peyrière – Todos los derechos reservados</footer>
 
 <script>
-const toggle = document.querySelector('.theme-toggle');
-const langBtn = document.querySelector('.lang-toggle');
+/* ---------- SELECTION DES ELEMENTS ---------- */
+const toggle = document.querySelector('.theme-toggle'); // Bouton thème
+const langBtn = document.querySelector('.lang-toggle'); // Bouton langue
 
-/* ---------- TEMA ---------- */
-const savedTheme = localStorage.getItem('theme');
+/* ---------- THEME ---------- */
+const savedTheme = localStorage.getItem('theme'); // Vérifie le thème sauvegardé
 if (savedTheme === 'dark') {
-  document.body.classList.add('dark');
-  toggle.textContent = '☀️';
+  document.body.classList.add('dark'); // Applique thème sombre
+  toggle.textContent = '☀️'; // Change l'icône
 }
-toggle.addEventListener('click', () => {
-  document.body.classList.toggle('dark');
-  toggle.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
-  localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+
+toggle.addEventListener('click', () => { // Click sur bouton thème
+  document.body.classList.toggle('dark'); // Active/desactive sombre
+  toggle.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙'; // Change icône
+  localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light'); // Sauvegarde
 });
+
+/* Synchronisation entre onglets */
 window.addEventListener('storage', (e) => {
   if (e.key === 'theme') {
     const isDark = e.newValue === 'dark';
@@ -252,7 +277,7 @@ window.addEventListener('storage', (e) => {
   }
 });
 
-/* ---------- ANIMACIONES ---------- */
+/* ---------- ANIMATIONS AU LOAD ---------- */
 window.addEventListener('load', () => {
   const headerH1 = document.querySelector('header h1');
   const navLinks = document.querySelectorAll('nav a');
@@ -260,15 +285,15 @@ window.addEventListener('load', () => {
   const cards = document.querySelectorAll('.card');
   const footer = document.querySelector('footer');
 
-  setTimeout(() => { headerH1.style.opacity = 1; headerH1.style.transform = 'translateY(0)'; }, 100);
+  setTimeout(() => { headerH1.style.opacity = 1; headerH1.style.transform = 'translateY(0)'; }, 100); // Animation header
 
   navLinks.forEach((link, i) => {
-    setTimeout(() => { link.style.opacity = 1; link.style.transform = 'translateY(0)'; }, 300 + i * 100);
+    setTimeout(() => { link.style.opacity = 1; link.style.transform = 'translateY(0)'; }, 300 + i * 100); // Animation liens
   });
 
-  setTimeout(() => { h2.classList.add('show'); }, 900);
+  setTimeout(() => { h2.classList.add('show'); }, 900); // Animation titre section
 
-  cards.forEach((card, i) => {
+  cards.forEach((card, i) => { // Animation cartes
     setTimeout(() => {
       card.classList.add('show');
       const h3 = card.querySelector('h3');
@@ -278,12 +303,12 @@ window.addEventListener('load', () => {
     }, 1100 + i * 200);
   });
 
-  setTimeout(() => { footer.classList.add('show'); }, 2000);
+  setTimeout(() => { footer.classList.add('show'); }, 2000); // Animation footer
 });
 
-/* ---------- IDIOMA ---------- */
-const savedLang = localStorage.getItem('lang') || 'fr';
-const page = window.location.pathname.split('/').pop();
+/* ---------- LANGUE ---------- */
+const savedLang = localStorage.getItem('lang') || 'fr'; // Langue sauvegardée
+const page = window.location.pathname.split('/').pop(); // Nom du fichier actuel
 const pages = {
   accueil: { fr: 'accueil_fr.html', es: 'accueil_es.html' },
   competences: { fr: 'competences_fr.html', es: 'competencias_es.html' },
@@ -291,17 +316,20 @@ const pages = {
   contact: { fr: 'contact_fr.html', es: 'contacto_es.html' }
 };
 let currentKey = null;
-for (const key in pages) {
+for (const key in pages) { // Trouve la clé correspondant à la page
   if (Object.values(pages[key]).includes(page)) currentKey = key;
 }
-langBtn.textContent = savedLang.toUpperCase();
-if (currentKey && pages[currentKey][savedLang] !== page) window.location.replace(pages[currentKey][savedLang]);
-langBtn.addEventListener('click', () => {
+
+langBtn.textContent = savedLang.toUpperCase(); // Affiche la langue actuelle
+if (currentKey && pages[currentKey][savedLang] !== page) window.location.replace(pages[currentKey][savedLang]); // Redirection si langue différente
+
+langBtn.addEventListener('click', () => { // Change de langue
   const newLang = savedLang === 'fr' ? 'es' : 'fr';
   localStorage.setItem('lang', newLang);
-  if (currentKey) window.location.href = pages[currentKey][newLang];
+  if (currentKey) window.location.href = pages[currentKey][newLang]; // Redirection
 });
-window.addEventListener('storage', (e) => { if (e.key === 'lang') location.reload(); });
+
+window.addEventListener('storage', (e) => { if (e.key === 'lang') location.reload(); }); // Synchronisation entre onglets
 </script>
 
 </body>
