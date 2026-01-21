@@ -11,16 +11,16 @@
 <style>
 /* ------------------- VARIABLES CSS ------------------- */
 :root {
-    --primary: #4f46e5;      /* Couleur principale (bleu violet) */
-    --secondary: #ff6584;    /* Couleur secondaire (rose) */
-    --light-bg: #f5f5f5;     /* Fond clair */
-    --dark-bg: #121212;      /* Fond sombre */
-    --light-card: #fff;      /* Fond des cartes en clair */
-    --dark-card: #1e1e1e;    /* Fond des cartes en sombre */
-    --text-light: #222;      /* Couleur texte clair */
-    --text-dark: #e0e0e0;    /* Couleur texte sombre */
-    --glow-light: rgba(79,70,229,0.5);  /* Effet lumineux clair */
-    --glow-dark: rgba(255,101,132,0.6); /* Effet lumineux sombre */
+    --primary: #4f46e5;
+    --secondary: #ff6584;
+    --light-bg: #f5f5f5;
+    --dark-bg: #121212;
+    --light-card: #fff;
+    --dark-card: #1e1e1e;
+    --text-light: #222;
+    --text-dark: #e0e0e0;
+    --glow-light: rgba(79,70,229,0.5);
+    --glow-dark: rgba(255,101,132,0.6);
 }
 
 /* ------------------- RESET CSS ------------------- */
@@ -28,79 +28,67 @@
 
 /* ------------------- BODY ------------------- */
 body {
-    font-family: 'Poppins', sans-serif;  /* Police principale */
-    background: var(--light-bg);         /* Fond par défaut clair */
-    color: var(--text-light);            /* Texte clair par défaut */
-    transition: 0.3s;                    /* Transition douce pour changements de thème */
-    overflow-x: hidden;                  /* Empêche le scroll horizontal */
+    font-family: 'Poppins', sans-serif;
+    background: var(--light-bg);
+    color: var(--text-light);
+    transition: 0.3s;
+    overflow-x: hidden;
 }
-
-/* Thème sombre */
-body.dark { 
-    background: var(--dark-bg); 
-    color: var(--text-dark); 
+body.dark {
+    background: var(--dark-bg);
+    color: var(--text-dark);
 }
 
 /* ------------------- HEADER ------------------- */
 header {
-    position: fixed;             /* Toujours visible en haut */
+    position: fixed;
     top: 0;
-    width: 100%;                 /* Prend toute la largeur */
-    padding: 20px 50px;          /* Espacement interne */
+    width: 100%;
+    padding: 20px 50px;
     display: flex;
-    justify-content: space-between; /* Espacement entre titre et menu */
-    align-items: center;         /* Alignement vertical centré */
-    backdrop-filter: blur(12px); /* Flou de fond */
-    background: rgba(255,255,255,0.9); /* Fond semi-transparent */
+    justify-content: space-between;
+    align-items: center;
+    backdrop-filter: blur(12px);
+    background: rgba(255,255,255,0.9);
     border-bottom: 1px solid #ccc;
-    z-index: 1000;               /* Au-dessus des autres éléments */
+    z-index: 1000;
     transition: 0.3s;
 }
-
-/* Header sombre */
-body.dark header { 
-    background: rgba(18,18,18,0.9); 
-    border-color: #333; 
+body.dark header {
+    background: rgba(18,18,18,0.9);
+    border-color: #333;
 }
-
-/* Titre principal du header */
-header h1 { 
-    font-size: 1.8rem; 
-    font-weight: 700; 
-    opacity: 0;                /* Invisible au départ */
-    transform: translateY(40px); /* Décalé vers le bas */
-    transition: all 0.8s ease-out; /* Animation */
+header h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s ease-out;
 }
 
 /* ------------------- NAVIGATION ------------------- */
 nav a {
-    margin-left: 30px;        /* Espacement entre liens */
-    color: inherit;           /* Hérite de la couleur du texte */
-    text-decoration: none;    /* Supprime le souligné */
+    margin-left: 30px;
+    color: inherit;
+    text-decoration: none;
     font-weight: 500;
     position: relative;
 }
-
-/* Souligné animé */
 nav a::after {
     content: "";
     position: absolute;
-    left: 0; 
+    left: 0;
     bottom: -6px;
-    width: 0%;                /* Invisible au départ */
+    width: 0%;
     height: 2px;
-    background: var(--primary); /* Couleur du souligné */
+    background: var(--primary);
     transition: 0.3s;
 }
-
-/* Souligné différent en mode sombre */
-body.dark nav a::after { 
-    background: var(--secondary); 
+body.dark nav a::after {
+    background: var(--secondary);
 }
-
-/* Effet sur hover ou lien actif */
-nav a:hover::after, nav a.active::after { 
-    width: 100%; 
+nav a:hover::after, nav a.active::after {
+    width: 100%;
 }
 
 /* ------------------- BOUTONS THEME ET LANGUE ------------------- */
@@ -109,28 +97,22 @@ nav a:hover::after, nav a.active::after {
     gap: 10px;
     align-items: center;
 }
-
-/* Style des boutons */
 .theme-toggle,
 .lang-toggle {
     padding: 10px 20px;
-    border-radius: 50px;               /* Boutons arrondis */
+    border-radius: 50px;
     border: none;
     cursor: pointer;
     font-weight: 600;
     color: white;
     background: linear-gradient(45deg, var(--primary), var(--secondary));
-    transition: transform 0.3s, box-shadow 0.3s; /* Animation au hover */
+    transition: transform 0.3s, box-shadow 0.3s;
 }
-
-/* Animation hover */
 .theme-toggle:hover,
 .lang-toggle:hover {
-    transform: scale(1.2) rotate(6deg); /* Grossit et tourne légèrement */
-    box-shadow: 0 0 25px var(--glow-light); /* Halo lumineux */
+    transform: scale(1.2) rotate(6deg);
+    box-shadow: 0 0 25px var(--glow-light);
 }
-
-/* Hover mode sombre */
 body.dark .theme-toggle:hover,
 body.dark .lang-toggle:hover {
     box-shadow: 0 0 30px var(--glow-dark);
@@ -139,45 +121,38 @@ body.dark .lang-toggle:hover {
 /* ------------------- MAIN ------------------- */
 main {
     min-height: 100vh;
-    padding: 140px 20px 50px; /* Espace pour header fixe */
+    padding: 140px 20px 50px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
 }
-
-/* Titre principal */
-main h2 { 
-    font-size: 3rem; 
-    margin-bottom: 20px; 
-    opacity: 0; 
-    transform: translateY(40px); 
-    transition: all 0.8s ease-out; 
+main h2 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s ease-out;
 }
-
-/* Classe pour montrer le titre avec effet lumineux */
 h2.show {
-    opacity: 1; 
+    opacity: 1;
     transform: translateY(0);
     text-shadow: 0 0 5px var(--glow-light), 0 0 10px var(--glow-light);
 }
-
-/* Mode sombre */
-body.dark h2.show { 
-    text-shadow: 0 0 5px var(--glow-dark), 0 0 10px var(--glow-dark); 
+body.dark h2.show {
+    text-shadow: 0 0 5px var(--glow-dark), 0 0 10px var(--glow-dark);
 }
 
 /* ------------------- CARDS ------------------- */
 .cards {
     width: 100%;
-    max-width: 1000px; 
+    max-width: 1000px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Grille responsive */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 30px;
     margin-top: 20px;
 }
-
 .card {
     background: var(--light-card);
     padding: 30px;
@@ -185,35 +160,59 @@ body.dark h2.show {
     box-shadow: 0 8px 20px rgba(0,0,0,0.1);
     text-align: center;
     transition: 0.3s;
-    opacity: 0;               /* Invisible au départ */
+    opacity: 0;
     transform: translateY(40px);
 }
-
-/* Mode sombre */
 body.dark .card {
     background: var(--dark-card);
     box-shadow: 0 8px 20px rgba(0,0,0,0.5);
 }
-
-/* Effet sur hover */
 .card.show { opacity: 1; transform: translateY(0); }
-.card:hover { 
-    transform: translateY(-10px);
-    box-shadow: 0 15px 35px var(--glow-light);
+.card:hover { transform: translateY(-10px); box-shadow: 0 15px 35px var(--glow-light); }
+body.dark .card:hover { box-shadow: 0 15px 35px var(--glow-dark); }
+.card h3, .card p {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s ease-out;
 }
-body.dark .card:hover { 
-    box-shadow: 0 15px 35px var(--glow-dark); 
+.card h3.show, .card p.show {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-/* Titre et texte des cartes */
-.card h3, .card p { 
-    opacity: 0; 
-    transform: translateY(40px); 
-    transition: all 0.8s ease-out; 
+/* ------------------- AUDIO BUTTON ------------------- */
+.audio-toggle {
+    font-size: 1.2rem;
+    padding: 5px 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 10px;
+    border: none;
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    color: white;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
-.card h3.show, .card p.show { 
-    opacity: 1; 
-    transform: translateY(0); 
+.audio-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px var(--glow-light);
+}
+body.dark .audio-toggle:hover {
+    box-shadow: 0 0 20px var(--glow-dark);
+}
+
+/* ------------------- LECTEUR AUDIO ------------------- */
+.audio-player {
+    margin-top: 10px;
+    width: 100%;
+    display: none;
+    border-radius: 10px;
+    padding: 5px;
+    background-color: #f0f0f0; /* clair intégré */
+    color: #222;
+}
+body.dark .audio-player {
+    background-color: #2c2c2c; /* gris foncé */
+    color: #e0e0e0;
 }
 
 /* ------------------- FOOTER ------------------- */
@@ -261,7 +260,8 @@ body.dark footer { border-color: #333; }
         <div class="card">
             <h3>Musiques</h3>
             <p>Petites productions et utilisation de logiciels audio</p>
-            <audio controls style="margin-top: 10px; width: 100%;">
+            <button class="audio-toggle">+</button>
+            <audio class="audio-player" controls>
                 <source src="techno-music.mp3" type="audio/mpeg">
                 Ton navigateur ne supporte pas l'élément audio.
             </audio>
@@ -278,23 +278,19 @@ body.dark footer { border-color: #333; }
 <script>
 /* ------------------- THEME TOGGLE ------------------- */
 const toggle = document.querySelector('.theme-toggle');
-const langBtn = document.querySelector('.lang-toggle');
-
-/* Récupération du thème enregistré */
 const savedTheme = localStorage.getItem('theme');
-if(savedTheme==='dark'){ 
-    document.body.classList.add('dark'); 
-    toggle.textContent='☀️'; /* Change icône selon thème */
+if(savedTheme === 'dark') {
+    document.body.classList.add('dark');
+    toggle.textContent = '☀️';
 }
-
-/* Changement de thème au clic */
 toggle.addEventListener('click', ()=>{
     document.body.classList.toggle('dark');
-    toggle.textContent = document.body.classList.contains('dark')?'☀️':'🌙';
-    localStorage.setItem('theme', document.body.classList.contains('dark')?'dark':'light');
+    toggle.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
+    localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
 });
 
 /* ------------------- LANGUE ------------------- */
+const langBtn = document.querySelector('.lang-toggle');
 const savedLang = localStorage.getItem('lang') || 'fr';
 const page = window.location.pathname.split('/').pop();
 const pages = { 
@@ -303,51 +299,55 @@ const pages = {
     projets:{fr:'projets_fr.html',es:'proyectos_es.html'}, 
     contact:{fr:'contact_fr.html',es:'contacto_es.html'} 
 };
-
 let currentKey = null; 
 for(const key in pages){ 
-    if(Object.values(pages[key]).includes(page)) currentKey=key; 
+    if(Object.values(pages[key]).includes(page)) currentKey = key; 
 }
-
 langBtn.textContent = savedLang.toUpperCase();
-/* Redirection si la langue actuelle ne correspond pas à la langue sauvegardée */
-if(currentKey && pages[currentKey][savedLang]!==page){ 
+if(currentKey && pages[currentKey][savedLang] !== page){ 
     window.location.replace(pages[currentKey][savedLang]); 
 }
-
-/* Changement de langue au clic */
 langBtn.addEventListener('click', ()=>{
     const newLang = savedLang==='fr'?'es':'fr';
-    localStorage.setItem('lang',newLang);
+    localStorage.setItem('lang', newLang);
     if(currentKey) window.location.href = pages[currentKey][newLang];
 });
-
-/* Synchronisation entre onglets */
-window.addEventListener('storage',(e)=>{ 
+window.addEventListener('storage', (e)=>{ 
     if(e.key==='lang'){ location.reload(); } 
 });
 
 /* ------------------- ANIMATIONS ------------------- */
-window.addEventListener('load',()=>{
+window.addEventListener('load', ()=>{
     const h1 = document.querySelector('header h1');
     const h2 = document.querySelector('main h2');
     const cards = document.querySelectorAll('.card');
 
-    /* Animation titre du header */
-    setTimeout(()=>{h1.style.opacity=1; h1.style.transform='translateY(0)';},100);
+    setTimeout(()=>{ h1.style.opacity=1; h1.style.transform='translateY(0)'; },100);
+    setTimeout(()=>{ h2.classList.add('show'); },400);
 
-    /* Animation titre principal */
-    setTimeout(()=>{h2.classList.add('show');},400);
-
-    /* Animation des cartes */
     cards.forEach((card,i)=>{
         setTimeout(()=>{
             card.classList.add('show');
             const h3 = card.querySelector('h3');
             const p = card.querySelector('p');
-            setTimeout(()=>{h3.classList.add('show');},100);
-            setTimeout(()=>{p.classList.add('show');},300);
+            setTimeout(()=>{ h3.classList.add('show'); },100);
+            setTimeout(()=>{ p.classList.add('show'); },300);
         },700 + i*200);
+    });
+
+    /* ------------------- AUDIO TOGGLE ------------------- */
+    const audioToggles = document.querySelectorAll('.audio-toggle');
+    audioToggles.forEach(btn => {
+        const audio = btn.closest('.card').querySelector('.audio-player');
+        btn.addEventListener('click', ()=>{
+            if(audio.style.display === 'none' || audio.style.display === ''){
+                audio.style.display = 'block';
+                btn.textContent = '−';
+            } else {
+                audio.style.display = 'none';
+                btn.textContent = '+';
+            }
+        });
     });
 });
 </script>

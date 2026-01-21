@@ -1,298 +1,267 @@
 <!DOCTYPE html>
-<!-- Indica que el documento está en HTML5 -->
-
 <html lang="es">
-<!-- Inicio del documento HTML, idioma principal: español -->
-
 <head>
 <meta charset="UTF-8">
-<!-- Codificación UTF-8 para caracteres especiales y acentos -->
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- Permite un diseño responsivo en móviles -->
+<title>Portfolio - Habilidades</title>
 
-<title>Portafolio - Competencias</title>
-<!-- Título que aparece en la pestaña del navegador -->
-
+<!-- Importación de la fuente Poppins desde Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-<!-- Importa la fuente Google Fonts "Poppins" -->
 
 <style>
-/* ================= VARIABLES GLOBALES ================= */
+/* ------------------- VARIABLES CSS ------------------- */
 :root {
-    --primary: #4f46e5;           /* Color principal */
-    --secondary: #ff6584;         /* Color secundario */
-    --light-bg: #f5f5f5;          /* Fondo claro */
-    --dark-bg: #121212;           /* Fondo oscuro */
-    --light-card: #fff;           /* Fondo tarjeta clara */
-    --dark-card: #1e1e1e;         /* Fondo tarjeta oscura */
-    --text-light: #222;           /* Color texto claro */
-    --text-dark: #e0e0e0;         /* Color texto oscuro */
-    --glow-light: rgba(79,70,229,0.5); /* Efecto resplandor claro */
-    --glow-dark: rgba(255,101,132,0.6); /* Efecto resplandor oscuro */
+    --primary: #4f46e5;      /* Color principal (para botones y subrayado de links) */
+    --secondary: #ff6584;    /* Color secundario (para hover y modo oscuro) */
+    --light-bg: #f5f5f5;     /* Fondo claro del body */
+    --dark-bg: #121212;      /* Fondo oscuro del body */
+    --light-card: #fff;      /* Fondo claro de las tarjetas */
+    --dark-card: #1e1e1e;    /* Fondo oscuro de las tarjetas */
+    --text-light: #222;      /* Color de texto en modo claro */
+    --text-dark: #e0e0e0;    /* Color de texto en modo oscuro */
+    --glow-light: rgba(79,70,229,0.5); /* Sombra brillante para modo claro */
+    --glow-dark: rgba(255,101,132,0.6); /* Sombra brillante para modo oscuro */
 }
 
-/* Reset de márgenes y padding */
-* { 
-    box-sizing: border-box; /* Incluye padding y border en tamaño */
-    margin: 0; 
-    padding: 0; 
-}
+/* ------------------- RESET CSS ------------------- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* ================= BODY ================= */
+/* ------------------- BODY ------------------- */
 body {
-    font-family: 'Poppins', sans-serif; /* Fuente principal */
-    background: var(--light-bg);        /* Fondo claro */
-    color: var(--text-light);           /* Color de texto */
-    transition: 0.3s;                   /* Transición suave para cambios */
-    overflow-x: hidden;                 /* Evita scroll horizontal */
+    font-family: 'Poppins', sans-serif;
+    background: var(--light-bg);
+    color: var(--text-light);
+    transition: 0.3s;       /* Suaviza los cambios de tema */
+    overflow-x: hidden;      /* Evita scroll horizontal */
 }
-
 /* Modo oscuro */
 body.dark { 
     background: var(--dark-bg); 
     color: var(--text-dark); 
 }
 
-/* ================= HEADER ================= */
+/* ------------------- HEADER ------------------- */
 header {
-    position: fixed; 
-    top: 0; 
-    width: 100%; 
+    position: fixed;         /* Siempre visible */
+    top: 0;
+    width: 100%;
     padding: 20px 50px;
-    display: flex; 
-    justify-content: space-between; 
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    backdrop-filter: blur(12px); /* Efecto vidrio difuso */
-    background: rgba(255,255,255,0.9);
+    backdrop-filter: blur(12px); /* Efecto borroso detrás del header */
+    background: rgba(255,255,255,0.9); /* Fondo semi-transparente */
     border-bottom: 1px solid #ccc;
-    z-index: 1000;
+    z-index: 1000;           /* Encima de otros elementos */
     transition: 0.3s;
 }
-
 /* Header modo oscuro */
 body.dark header { 
     background: rgba(18,18,18,0.9); 
     border-color: #333; 
 }
-
-/* Título del header */
 header h1 { 
-    font-size: 1.8rem; 
-    font-weight: 700; 
-    opacity: 0;                   /* Oculto al inicio */
-    transform: translateY(40px); /* Desplazado hacia abajo */
-    transition: all 0.8s ease-out; 
+    font-size:1.8rem; 
+    font-weight:700; 
+    opacity:0; 
+    transform:translateY(40px); 
+    transition:all 0.8s ease-out; 
 }
 
-/* ================= NAV ================= */
+/* ------------------- NAV ------------------- */
 nav a {
-    margin-left: 30px; 
-    color: inherit; 
-    text-decoration: none; 
-    font-weight: 500; 
-    position: relative; 
+    margin-left: 30px;
+    color: inherit;          /* Hereda el color del body */
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;      /* Para subrayado animado */
 }
-
-/* Subrayado animado */
 nav a::after {
-    content: ""; 
-    position: absolute; 
-    left: 0; 
-    bottom: -6px; 
-    width: 0; 
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0%;
     height: 2px;
-    background: var(--primary); 
-    transition: width 0.4s ease;
+    background: var(--primary);
+    transition: 0.3s;
 }
+body.dark nav a::after { background: var(--secondary); }
+nav a:hover::after, nav a.active::after { width: 100%; } /* Animación de subrayado */
 
-/* Subrayado modo oscuro */
-body.dark nav a::after { 
-    background: var(--secondary); 
-}
-
-/* Hover y link activo */
-nav a:hover::after, nav a.active::after { width: 100%; }
-
-/* ================= BOTONES HEADER ================= */
-.header-buttons {
-    display: flex; 
-    gap: 10px; 
-    align-items: center; 
-}
-
-/* Botones tema y idioma */
+/* ------------------- BOTONES DE TEMA Y LENGUA ------------------- */
+.header-buttons { display:flex; gap:10px; align-items:center; }
 .theme-toggle, .lang-toggle {
-    padding: 10px 20px; 
-    border-radius: 50px; 
-    border: none; 
-    cursor: pointer;
-    font-weight: 600; 
+    padding:10px 20px; 
+    border-radius:50px; 
+    border:none; 
+    cursor:pointer; 
+    font-weight:600;
+    color:white; 
+    background: linear-gradient(45deg,var(--primary),var(--secondary));
     transition: transform 0.3s, box-shadow 0.3s;
-    background: linear-gradient(45deg, var(--primary), var(--secondary));
-    color: #fff;
+}
+.theme-toggle:hover, .lang-toggle:hover { 
+    transform: scale(1.2) rotate(6deg); 
+    box-shadow:0 0 25px var(--glow-light);
+}
+body.dark .theme-toggle:hover, body.dark .lang-toggle:hover { 
+    box-shadow:0 0 30px var(--glow-dark);
 }
 
-/* Hover botones */
-.theme-toggle:hover, .lang-toggle:hover {
-    transform: scale(1.2) rotate(6deg);
-    box-shadow: 0 0 25px var(--glow-light);
-}
-
-/* Hover modo oscuro */
-body.dark .theme-toggle:hover, body.dark .lang-toggle:hover {
-    box-shadow: 0 0 30px var(--glow-dark);
-}
-
-/* ================= MAIN ================= */
+/* ------------------- MAIN ------------------- */
 main {
-    min-height: 100vh; 
-    padding: 140px 20px 50px; 
-    display: flex;
-    flex-direction: column; 
-    align-items: center; 
-    justify-content: center; 
-    text-align: center;
+    min-height: 100vh;
+    padding: 140px 20px 50px;
+    display:flex; 
+    flex-direction:column; 
+    align-items:center; 
+    justify-content:center; 
+    text-align:center;
 }
-
-/* Título principal */
 main h2 { 
-    font-size: 3rem; 
-    margin-bottom: 20px; 
-    opacity: 0; 
-    transform: translateY(40px); 
+    font-size:3rem; 
+    margin-bottom:20px; 
+    opacity:0; 
+    transform:translateY(40px); 
     transition: all 0.8s ease-out; 
 }
-
-/* Clase JS para mostrar el título */
 h2.show { 
-    opacity: 1; 
-    transform: translateY(0); 
-    text-shadow: 0 0 5px var(--glow-light), 0 0 10px var(--glow-light); 
+    opacity:1; 
+    transform:translateY(0); 
+    text-shadow:0 0 5px var(--glow-light),0 0 10px var(--glow-light);
 }
-
-/* Glow modo oscuro */
 body.dark h2.show { 
-    text-shadow: 0 0 5px var(--glow-dark), 0 0 10px var(--glow-dark); 
+    text-shadow:0 0 5px var(--glow-dark),0 0 10px var(--glow-dark);
 }
 
-/* ================= CARDS ================= */
-.cards {
-    width: 100%; 
-    max-width: 1000px; 
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
-    gap: 30px; 
-    margin-top: 20px;
+/* ------------------- TARJETAS ------------------- */
+.cards { 
+    width:100%; 
+    max-width:1000px; 
+    display:grid; 
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); 
+    gap:30px; 
+    margin-top:20px; 
 }
-
-/* Tarjeta individual */
-.card {
+.card { 
     background: var(--light-card); 
-    padding: 30px; 
-    border-radius: 20px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1); 
-    text-align: center; 
-    transition: 0.3s;
-    opacity: 0; 
-    transform: translateY(40px);
+    padding:30px; 
+    border-radius:20px; 
+    box-shadow:0 8px 20px rgba(0,0,0,0.1); 
+    text-align:center; 
+    transition:0.3s; 
+    opacity:0; 
+    transform:translateY(40px);
 }
-
-/* Tarjeta modo oscuro */
 body.dark .card { 
     background: var(--dark-card); 
-    box-shadow: 0 8px 20px rgba(0,0,0,0.5); 
+    box-shadow:0 8px 20px rgba(0,0,0,0.5);
 }
-
-/* Mostrar tarjeta */
-.card.show { 
-    opacity: 1; 
-    transform: translateY(0); 
-}
-
-/* Hover tarjeta */
+.card.show { opacity:1; transform:translateY(0); }
 .card:hover { 
-    transform: translateY(-10px); 
-    box-shadow: 0 15px 35px var(--glow-light); 
+    transform:translateY(-10px); 
+    box-shadow:0 15px 35px var(--glow-light);
 }
-
-/* Hover modo oscuro */
 body.dark .card:hover { 
-    box-shadow: 0 15px 35px var(--glow-dark); 
+    box-shadow:0 15px 35px var(--glow-dark);
 }
-
-/* Animación del texto dentro de la tarjeta */
 .card h3, .card p { 
-    opacity: 0; 
-    transform: translateY(40px); 
+    opacity:0; 
+    transform:translateY(40px); 
     transition: all 0.8s ease-out; 
 }
-.card h3.show, .card p.show { 
-    opacity: 1; 
-    transform: translateY(0); 
+.card h3.show, .card p.show { opacity:1; transform:translateY(0); }
+
+/* ------------------- BOTÓN DE AUDIO ------------------- */
+.audio-toggle {
+    font-size:1.2rem; 
+    padding:5px 10px; 
+    margin-top:10px; 
+    cursor:pointer; 
+    border-radius:10px; 
+    border:none;
+    background: linear-gradient(45deg,var(--primary),var(--secondary)); 
+    color:white;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.audio-toggle:hover { 
+    transform: scale(1.1); 
+    box-shadow:0 0 15px var(--glow-light);
+}
+body.dark .audio-toggle:hover { 
+    box-shadow:0 0 20px var(--glow-dark);
 }
 
-/* ================= FOOTER ================= */
+/* ------------------- LECTOR AUDIO ------------------- */
+.audio-player {
+    margin-top:10px; 
+    width:100%; 
+    display:none;         /* Oculto por defecto, se muestra al pulsar + */
+    border-radius:10px; 
+    padding:5px; 
+    background-color:#f0f0f0; /* Claro por defecto */
+    color:#222;
+}
+body.dark .audio-player { 
+    background-color:#2c2c2c; /* Gris oscuro en modo oscuro */
+    color:#e0e0e0; 
+}
+
+/* ------------------- FOOTER ------------------- */
 footer { 
-    text-align: center; 
-    padding: 30px 0; 
-    border-top: 1px solid #ccc; 
+    text-align:center; 
+    padding:30px 0; 
+    border-top:1px solid #ccc; 
 }
-body.dark footer { 
-    border-color: #333; 
-}
+body.dark footer { border-color:#333; }
 
-/* ================= RESPONSIVE ================= */
-@media(max-width:768px) {
-    header { padding: 15px 20px; }
-    nav a { margin-left: 15px; font-size: 0.9rem; }
+/* ------------------- RESPONSIVE ------------------- */
+@media(max-width:768px){ 
+    header{padding:15px 20px;} 
+    nav a{margin-left:15px; font-size:0.9rem;} 
 }
 </style>
 </head>
 
 <body>
-
 <header>
     <h1>Lucas Lara Peyrière</h1>
-
-    <!-- Navegación -->
     <nav>
-        <a href="accueil_es.html">Inicio</a>
-        <a href="competencias_es.html" class="active">Competencias</a>
+        <a href="inicio_es.html">Inicio</a>
+        <a href="habilidades_es.html" class="active">Habilidades</a>
         <a href="proyectos_es.html">Proyectos</a>
         <a href="contacto_es.html">Contacto</a>
     </nav>
-
-    <!-- Botones de tema y idioma -->
     <div class="header-buttons">
-        <button class="theme-toggle">🌙</button>
-        <button class="lang-toggle">FR</button>
+        <button class="theme-toggle">🌙</button> <!-- Cambia entre claro/oscuro -->
+        <button class="lang-toggle">FR</button> <!-- Cambia idioma -->
     </div>
 </header>
 
 <main>
-    <h2>Mis Competencias</h2>
-
+    <h2>Mis Habilidades</h2>
     <div class="cards">
         <div class="card">
             <h3>Programación</h3>
-            <p>Varios lenguajes de programación (HTML, CSS, JavaScript, C/C++)</p>
+            <p>HTML, CSS, JavaScript, C/C++</p>
         </div>
         <div class="card">
-            <h3>Trabajo manual</h3>
-            <p>Reparación de teléfonos y mantenimiento de dispositivos electrónicos</p>
+            <h3>Trabajo Manual</h3>
+            <p>Reparación de teléfonos y soluciones electrónicas</p>
         </div>
         <div class="card">
             <h3>Música</h3>
-            <p>Realización de pequeñas producciones y uso de software de audio.</p>
-            <audio controls style="margin-top: 10px; width: 100%;">
+            <p>Pequeñas producciones y uso de software de audio</p>
+            <button class="audio-toggle">+</button> <!-- Mostrar/Ocultar audio -->
+            <audio class="audio-player" controls>
                 <source src="techno-music.mp3" type="audio/mpeg">
                 Tu navegador no soporta el elemento de audio.
             </audio>
         </div>
         <div class="card">
             <h3>Bilingüe</h3>
-            <p>Hablo español con fluidez, por lo que puedo crear sitios en español.</p>
+            <p>Hablo español con fluidez y puedo crear sitios en español</p>
         </div>
     </div>
 </main>
@@ -300,75 +269,80 @@ body.dark footer {
 <footer>© 2025 Lucas Lara Peyrière – Todos los derechos reservados</footer>
 
 <script>
-// ================= THEME =================
+/* ------------------- THEME TOGGLE ------------------- */
 const toggle = document.querySelector('.theme-toggle');
-const langBtn = document.querySelector('.lang-toggle');
-
-// Recupera tema guardado
-const savedTheme = localStorage.getItem('theme');
-if(savedTheme==='dark'){ 
+const savedTheme = localStorage.getItem('theme'); // Recupera tema guardado
+if(savedTheme === 'dark'){ 
     document.body.classList.add('dark'); 
-    toggle.textContent='☀️'; 
+    toggle.textContent='☀️'; // Cambiar icono
 }
-
-// Cambiar tema
 toggle.addEventListener('click', ()=>{
-    document.body.classList.toggle('dark');
-    toggle.textContent=document.body.classList.contains('dark')?'☀️':'🌙';
-    localStorage.setItem('theme',document.body.classList.contains('dark')?'dark':'light');
+    document.body.classList.toggle('dark'); 
+    toggle.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
+    localStorage.setItem('theme', document.body.classList.contains('dark')?'dark':'light');
 });
 
-// Sincronización entre pestañas
-window.addEventListener('storage', e=>{
-    if(e.key==='theme'){
-        const isDark=e.newValue==='dark';
-        document.body.classList.toggle('dark', isDark);
-        toggle.textContent=isDark?'☀️':'🌙';
-    }
-});
-
-// ================= ANIMACIONES =================
-window.addEventListener('load', ()=>{
-    const h1=document.querySelector('header h1');
-    const h2=document.querySelector('main h2');
-    const cards=document.querySelectorAll('.card');
-
-    setTimeout(()=>{ h1.style.opacity=1; h1.style.transform='translateY(0)'; },100);
-    setTimeout(()=>{ h2.classList.add('show'); },400);
-
-    cards.forEach((card,i)=>{
-        setTimeout(()=>{
-            card.classList.add('show');
-            const elems=[...card.querySelectorAll('h3,p')];
-            elems.forEach((el,j)=>{ setTimeout(()=>el.classList.add('show'), j*200); });
-        }, 500+i*200);
-    });
-});
-
-// ================= IDIOMA =================
+/* ------------------- CAMBIO DE LENGUA ------------------- */
+const langBtn = document.querySelector('.lang-toggle');
 const savedLang = localStorage.getItem('lang') || 'es';
 const page = window.location.pathname.split('/').pop();
-const pages = {
-    accueil: {fr:'accueil_fr.html', es:'accueil_es.html'},
-    competences: {fr:'competences_fr.html', es:'competencias_es.html'},
-    projets: {fr:'projets_fr.html', es:'proyectos_es.html'},
-    contact: {fr:'contact_fr.html', es:'contacto_es.html'}
+const pages = { 
+    inicio:{fr:'accueil_fr.html',es:'accueil_es.html'}, 
+    habilidades:{fr:'competences_fr.html',es:'competencias_es.html'}, 
+    proyectos:{fr:'projets_fr.html',es:'proyectos_es.html'}, 
+    contacto:{fr:'contact_fr.html',es:'contacto_es.html'} 
 };
-let currentKey=null;
+let currentKey = null; 
 for(const key in pages){ 
-    if(Object.values(pages[key]).includes(page)){ currentKey=key; break; } 
+    if(Object.values(pages[key]).includes(page)) currentKey = key; 
 }
 langBtn.textContent = savedLang.toUpperCase();
-if(currentKey && pages[currentKey][savedLang]!==page){ 
+if(currentKey && pages[currentKey][savedLang] !== page){ 
     window.location.replace(pages[currentKey][savedLang]); 
 }
 langBtn.addEventListener('click', ()=>{
-    const newLang = savedLang==='fr'?'es':'fr';
+    const newLang = savedLang==='es'?'fr':'es';
     localStorage.setItem('lang', newLang);
-    if(currentKey){ window.location.href=pages[currentKey][newLang]; }
+    if(currentKey) window.location.href = pages[currentKey][newLang];
 });
-window.addEventListener('storage', e=>{ if(e.key==='lang'){ location.reload(); } });
-</script>
+window.addEventListener('storage', (e)=>{ if(e.key==='lang'){ location.reload(); } });
 
+/* ------------------- ANIMACIONES AL CARGAR ------------------- */
+window.addEventListener('load', ()=>{
+    const h1 = document.querySelector('header h1');
+    const h2 = document.querySelector('main h2');
+    const cards = document.querySelectorAll('.card');
+
+    // Animación header
+    setTimeout(()=>{ h1.style.opacity=1; h1.style.transform='translateY(0)'; },100);
+    setTimeout(()=>{ h2.classList.add('show'); },400);
+
+    // Animación tarjetas
+    cards.forEach((card,i)=>{
+        setTimeout(()=>{
+            card.classList.add('show');
+            const h3 = card.querySelector('h3');
+            const p = card.querySelector('p');
+            setTimeout(()=>{ h3.classList.add('show'); },100);
+            setTimeout(()=>{ p.classList.add('show'); },300);
+        },700 + i*200);
+    });
+
+    /* ------------------- BOTÓN AUDIO ------------------- */
+    const audioToggles = document.querySelectorAll('.audio-toggle');
+    audioToggles.forEach(btn => {
+        const audio = btn.closest('.card').querySelector('.audio-player');
+        btn.addEventListener('click', ()=>{
+            if(audio.style.display === 'none' || audio.style.display === ''){
+                audio.style.display = 'block';
+                btn.textContent = '−'; // Cambia el símbolo
+            } else {
+                audio.style.display = 'none';
+                btn.textContent = '+';
+            }
+        });
+    });
+});
+</script>
 </body>
 </html>
